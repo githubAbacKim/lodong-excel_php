@@ -25,9 +25,10 @@ class Conversation{
 
     public function __constructor($inputNum,$inputAnswer){
         $this->answer = $inputAnswer;
-        $this->qNum = $inputNum
+        $this->qNum = $inputNum;
     }
 
+    // determine answer conversion based on the question number category
     function answerFormula1(){
         if($this->answer <= 3){
             return '1';
@@ -53,14 +54,16 @@ class Conversation{
     }
     
     function checkAnswerSet(){
-        if (in_array($this->qNum, $questionAlgoArr1)) {
+        if (in_array($this->qNum, self::$questionAlgoArr1)) {
             $this->answerFormula1();
-        } elseif(in_array($this->qNum, $questionAlgoArr1)) {
+        } elseif(in_array($this->qNum, self::$questionAlgoArr1)) {
             $this->answerFormula2();
         }else{
             $this->answerFormula3();
         }
     }
+
+    
     
 }
 
