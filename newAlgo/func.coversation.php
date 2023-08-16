@@ -28,16 +28,6 @@ class Conversation{
         $this->qNum = $inputNum
     }
 
-    function checkAnswerSet(){
-        if (in_array($this->qNum, $questionAlgoArr1)) {
-            $this->answerFormula1();
-        } elseif(in_array($this->qNum, $questionAlgoArr1)) {
-            $this->answerFormula2();
-        }else{
-            $this->answerFormula3();
-        }
-    }
-
     function answerFormula1(){
         if($this->answer <= 3){
             return '1';
@@ -61,7 +51,16 @@ class Conversation{
             return '0';
         }
     }
-
+    
+    function checkAnswerSet(){
+        if (in_array($this->qNum, $questionAlgoArr1)) {
+            $this->answerFormula1();
+        } elseif(in_array($this->qNum, $questionAlgoArr1)) {
+            $this->answerFormula2();
+        }else{
+            $this->answerFormula3();
+        }
+    }
     
 }
 
