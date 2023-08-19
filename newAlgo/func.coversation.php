@@ -11,7 +11,7 @@ class Conversation{
     protected static $questionAlgoArr3 = array(10,20,30,40,50,60,70,80,90,100,110,120,121,123,130,140);
 
     protected static $personalityElementsArr = array(
-        array('A'=>'A 근면성','questionSet'=>array(24,25,34,44,54,64,74,84,94,104,114,124,134,144,212,226)),
+        array('A'=>'A 근면성','qnum'=>array(24,25,34,44,54,64,74,84,94,104,114,124,134,144,212,226),'correctAnswer'=>array(),'testModification'=>array()),
         array('B'=>'B 책임감','questionSet'=>array(6,16,26,36,46,56,66,76,96,106,116,126,136,146,137,208,217,221)),
         array('C'=>'C 협동성','questionSet'=>array(8,18,28,33,38,39,48,58,68,78,98,108,128,132,148,225,223)),
         array('D'=>'D 자주성','questionSet'=>array(1,11,14,21,31,41,51,71,81,91,101,111,118,131,141,220,224)),
@@ -63,7 +63,59 @@ class Conversation{
         }
     }
 
-    
+    function getCorrectAnswer(){
+        $h3 = /* value from H3 cell in Excel */;
+        $i3 = /* value from I3 cell in Excel */;
+
+        if ($h3 == $i3) {
+            $result = "-1";
+        } else {
+            $result = "0";
+        }
+
+        echo "Result: " . $result;
+    }
+
+    function getAverageScore(){
+        // Sample data representing the lookup range '인성검사 채점 조건'!$A$3:$E$18
+        $lookupRange = [
+            ['Value1', 'Value2', 'Value3', 'Value4', 'Result1'],
+            // ... other rows ...
+            ['O23_Value', 'Value2', 'Value3', 'Value4', 'Desired_Result'],
+            // ... other rows ...
+        ];
+
+        $o23Value = 'O23_Value';  // Value from O23 cell in Excel
+        $foundResult = null;
+
+        foreach ($lookupRange as $row) {
+            if ($row[0] === $o23Value) {
+                $foundResult = $row[4];  // Get the value from the 5th column (index 4)
+                break;  // Stop the loop once the match is found
+            }
+        }
+
+        if ($foundResult !== null) {
+            echo "Found result: " . $foundResult;
+        } else {
+            echo "No matching result found.";
+        }
+    }
+
+    function getNumberOfHits(){
+        $correctAnswer = 1;
+        $modification = 1;
+
+        if($correctAnswer === $modification){
+            return 'TRUE';
+        }else{
+            return 'FALSE';
+        }
+    }
+
+    // create array of personality test
+
+    // 
     
 }
 
