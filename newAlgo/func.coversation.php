@@ -11,17 +11,77 @@ class Conversation{
     protected static $questionAlgoArr3 = array(10,20,30,40,50,60,70,80,90,100,110,120,121,123,130,140);
 
     protected static $personalityElementsArr = array(
-        array('A'=>'A 근면성','qnum'=>array(24,25,34,44,54,64,74,84,94,104,114,124,134,144,212,226),'correctAnswer'=>array(),'testModification'=>array()),
-        array('B'=>'B 책임감','questionSet'=>array(6,16,26,36,46,56,66,76,96,106,116,126,136,146,137,208,217,221)),
-        array('C'=>'C 협동성','questionSet'=>array(8,18,28,33,38,39,48,58,68,78,98,108,128,132,148,225,223)),
-        array('D'=>'D 자주성','questionSet'=>array(1,11,14,21,31,41,51,71,81,91,101,111,118,131,141,220,224)),
-        array('E'=>'E 지도성','questionSet'=>array(9,19,29,49,69,79,89,99,109,119,129,138,139,149,150)),
-        array('F'=>'F 감정상태','questionSet'=>array(5,17,27,37,47,55,57,61,67,77,97,107,117,127,147,214,228,209,216,213)),
-        array('G'=>'G 집중력','questionSet'=>array(7,15,35,45,65,75,85,95,105,115,125,55,135,145,87,215,219,227)),
-        array('H'=>'H 정서안정','questionSet'=>array(3,13,23,43,53,63,73,83,93,103113,59,133,132,143,210,222)),
-        array('I'=>'I 준법성','questionSet'=>array(2,12,22,32,42,52,62,72,82,88,92,102,112,122,142,218,207,211))
+        [
+            'A'=>'A 근면성',
+            'questionSet'=>[24,25,34,44,54,64,74,84,94,104,114,124,134,144,212,226],
+            'answerShape'=>[24=>'',25=>'',34=>'',44=>'',54=>'',64=>'',74=>'',84=>'',94=>'',104=>'',114=>'',124=>'',134=>'',144=>'',212=>'',226=>''],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'B'=>'B 책임감',
+            'questionSet'=>[6,16,26,36,46,56,66,76,96,106,116,126,136,146,137,208,217,221],
+            'answerShape'=>[6=>'',16=>'',26=>'',36=>'',46=>'',56=>'',66=>'',76=>'',96=>'',106=>'',116=>'',126=>'',136=>'',146=>'',137=>'',208=>'',217=>'',221=>''],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'C'=>'C 협동성',
+            'questionSet'=>[8,18,28,33,38,39,48,58,68,78,98,108,128,132,148,225,223],
+            'answerShape'=>[8=>'',18=>'',28=>'',33=>'',38=>'',39=>'',48=>'',58=>'',68=>'',78=>'',98=>'',108=>'',128=>'',132=>'',148=>'',225=>'',223=>''],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'D'=>'D 자주성',
+            'questionSet'=>[1,11,14,21,31,41,51,71,81,91,101,111,118,131,141,220,224],
+            'answerShape'=>[1=>'',11=>'',14=>'',21=>'',31=>'',41=>'',51=>'',71=>'',81=>'',91=>'',101=>'',111=>'',118=>'',131=>'',141=>'',220=>'',224=>''],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'E'=>'E 지도성',
+            'questionSet'=>[9,19,29,49,69,79,89,99,109,119,129,138,139,149,150],
+            'answerShape'=>[9,19,29,49,69,79,89,99,109,119,129,138,139,149,150],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'F'=>'F 감정상태',
+            'questionSet'=>[5,17,27,37,47,55,57,61,67,77,97,107,117,127,147,214,228,209,216,213],
+            'answerShape'=>[5,17,27,37,47,55,57,61,67,77,97,107,117,127,147,214,228,209,216,213],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'G'=>'G 집중력',
+            'questionSet'=>[7,15,35,45,65,75,85,95,105,115,125,55,135,145,87,215,219,227],
+            'answerShape'=>[7,15,35,45,65,75,85,95,105,115,125,55,135,145,87,215,219,227],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'H'=>'H 정서안정',
+            'questionSet'=>[3,13,23,43,53,63,73,83,93,103113,59,133,132,143,210,222],
+            'answerShape'=>[3,13,23,43,53,63,73,83,93,103113,59,133,132,143,210,222],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ],
+        [
+            'I'=>'I 준법성',
+            'questionSet'=>[2,12,22,32,42,52,62,72,82,88,92,102,112,122,142,218,207,211],
+            'answerShape'=>[2,12,22,32,42,52,62,72,82,88,92,102,112,122,142,218,207,211],
+            'shapeModification'=>[],
+            'modificaitonConversionToActual'=>[]
+        ]
     );
-
+    protected static $correctAnswer = [];
+    protected static $testMakerModification = [];
+    protected static $answerShape = [];
+    protected static $shapeModification = [];
+    protected static $numberOfCorrectAnswers = [];
+    protected static $convertOfValue = [];
+    protected static $theNumberOfHits = [];
 
     public function __constructor($inputNum,$inputAnswer){
         $this->answer = $inputAnswer;
@@ -63,59 +123,7 @@ class Conversation{
         }
     }
 
-    function getCorrectAnswer(){
-        $h3 = /* value from H3 cell in Excel */;
-        $i3 = /* value from I3 cell in Excel */;
-
-        if ($h3 == $i3) {
-            $result = "-1";
-        } else {
-            $result = "0";
-        }
-
-        echo "Result: " . $result;
-    }
-
-    function getAverageScore(){
-        // Sample data representing the lookup range '인성검사 채점 조건'!$A$3:$E$18
-        $lookupRange = [
-            ['Value1', 'Value2', 'Value3', 'Value4', 'Result1'],
-            // ... other rows ...
-            ['O23_Value', 'Value2', 'Value3', 'Value4', 'Desired_Result'],
-            // ... other rows ...
-        ];
-
-        $o23Value = 'O23_Value';  // Value from O23 cell in Excel
-        $foundResult = null;
-
-        foreach ($lookupRange as $row) {
-            if ($row[0] === $o23Value) {
-                $foundResult = $row[4];  // Get the value from the 5th column (index 4)
-                break;  // Stop the loop once the match is found
-            }
-        }
-
-        if ($foundResult !== null) {
-            echo "Found result: " . $foundResult;
-        } else {
-            echo "No matching result found.";
-        }
-    }
-
-    function getNumberOfHits(){
-        $correctAnswer = 1;
-        $modification = 1;
-
-        if($correctAnswer === $modification){
-            return 'TRUE';
-        }else{
-            return 'FALSE';
-        }
-    }
-
-    // create array of personality test
-
-    // 
+    
     
 }
 
