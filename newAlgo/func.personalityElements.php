@@ -109,5 +109,29 @@
         public function __constructor($inputArr){
 
         }
+
+        public function checkQuestionSet(){
+            $questionNum = 4; // The question number you want to check
+
+            $elementContainingQuestion = null; // Initialize a variable to store the matching element
+
+            foreach (self::$personalityElementsArr as $element) {
+                if (in_array($questionNum, $element['questionSet'])) {
+                    $elementContainingQuestion = $element;
+                    break; // Exit the loop once a match is found
+                }
+            }
+
+            if ($elementContainingQuestion !== null) {
+                // The $questionNum is present in the 'questionSet' of an element
+                // $elementContainingQuestion now holds the matching element
+                // You can access its data like $elementContainingQuestion['A'], $elementContainingQuestion['correctAnswer'], etc.
+                // You may want to do something with this element.
+                print_r($elementContainingQuestion);
+            } else {
+                // The $questionNum is not present in any 'questionSet'
+                echo "Question $questionNum does not belong to any element.";
+            }
+        }
     }
 ?>
