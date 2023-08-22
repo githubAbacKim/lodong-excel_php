@@ -14,10 +14,26 @@
             array('H'=>'H 정서안정','questionSet'=>array(3,13,23,43,53,63,73,83,93,103113,59,133,132,143,210,222)),
             array('I'=>'I 준법성','questionSet'=>array(2,12,22,32,42,52,62,72,82,88,92,102,112,122,142,218,207,211))
         ); */
+        protected $personalityA = [];
+        protected $personalityB = [];
+        protected $personalityC = [];
+        protected $personalityD = [];
+        protected $personalityE = [];
+        protected $personalityF = [];
+        protected $personalityG = [];
+        protected $personalityH = [];
+        protected $personalityI = [];
 
-        protected static $personalityElementsArr = array(
+        // store the results for the actual score for all personalities
+        protected $personalityResult1 = [];
+        protected $personalityResult2 = [];
+
+
+        protected static $personnalityResultLabel = ['Deligence', 'Responsibility', 'Cooperation', 'Autonomy','Leadership', 'EmtionalState', 'Concentration', 'EmotionalStability', 'Compliance', 'talentSynthesis', 'ConfidenceLevel', 'TestAttitude', 'TestStatus', 'NonResponseRate', 'ResponseConsistency', 'Antisocial'];
+
+        protected static $personalityElementsArr = [
             [
-                'A'=>'A 근면성',
+                'type'=>'Deligence',
                 'questionSet'=>[4,24,25,34,44,54,64,74,84,94,104,114,124,134,144,212,226],
                 'correctAnswer'=>[4=>'1',24=>'2',25=>'2',34=>'1',44=>'1',54=>'2',64=>'1',74=>'1',84=>'1',94=>'2',104=>'1',114=>'2',124=>'1',134=>'2',144=>'1',212=>'',226=>''],
                 'answerShape'=>[4=>'2',24=>'1',25=>'1',34=>'',44=>'2',54=>'1',64=>'',74=>'',84=>'',94=>'',104=>'2',114=>'1',124=>'2',134=>'1',144=>'2',212=>'',226=>''],
@@ -26,7 +42,7 @@
                 'modificationValue'=>[4=>'-1',24=>'-1',25=>'-1',34=>'',44=>'-1',54=>'-2',64=>'',74=>'',84=>'',94=>'',104=>'-1',114=>'-1',124=>'-1',134=>'-2',144=>'-1',212=>'-3',226=>'-3']
             ],
             [
-                'B'=>'B 책임감',
+                'type'=>'Responsibility',
                 'questionSet'=>[6,16,26,36,46,56,66,76,96,106,116,126,136,146,137,208,217,221],
                 'correctAnswer'=>[6=>'1',16=>'1',26=>'1',36=>'1',46=>'1',56=>'2',66=>'1',76=>'1',96=>'1',106=>'2',116=>'1',1261=>'1',136=>'1',146=>'2',137=>'1',208=>'',217=>'',221=>''],
                 'answerShape'=>[6=>'',16=>'',26=>'',36=>'',46=>'',56=>'1',66=>'1',76=>'1',96=>'1',106=>'1',116=>'1',126=>'1',136=>'1',146=>'1',137=>'',208=>'',217=>'',221=>''],
@@ -35,7 +51,7 @@
                 'modificationValue'=>[6=>'',16=>'',26=>'',36=>'',46=>'',56=>'-3',66=>'-1',76=>'-1',96=>'-1',106=>'-2',116=>'-2',126=>'-1',136=>'-2',146=>'-4',137=>'',208=>'-3',217=>'-3',221=>'-3']
             ],
             [
-                'C'=>'C 협동성',
+                'type'=>'Cooperation',
                 'questionSet'=>[8,18,28,33,38,39,48,58,68,78,98,108,128,132,148,225,223],
                 'correctAnswer'=>[8=>'1',18=>'1',28=>'2',33=>'1',38=>'1',39=>'1',48=>'2',58=>'1',68=>'1',78=>'2',98=>'1',108=>'2',128=>'2',132=>'2',148=>'1',225=>'',223=>''],
                 'answerShape'=>[8=>'2',18=>'2',28=>'1',33=>'2',38=>'',39=>'',48=>'1',58=>'1',68=>'',78=>'',98=>'',108=>'1',128=>'',132=>'',148=>'',225=>'',223=>''],
@@ -44,7 +60,7 @@
                 'modificationValue'=>[8=>'-1',18=>'-2',28=>'-2',33=>'-1',38=>'',39=>'',48=>'-1',58=>'-1',68=>'',78=>'',98=>'',108=>'-2',128=>'',132=>'',148=>'',225=>'-3',223=>'-3']
             ],
             [
-                'D'=>'D 자주성',
+                'type'=>'Autonomy',
                 'questionSet'=>[1,11,14,21,31,41,51,71,81,91,101,111,118,131,141,220,224],
                 'correctAnswer'=>[1=>'1',11=>'1',14=>'1',21=>'2',31=>'2',41=>'2',51=>'2',71=>'2',81=>'1',91=>'2',101=>'2',111=>'1',118=>'2',131=>'1',141=>'1',220=>'',224=>''],
                 'answerShape'=>[1=>'2',11=>'',14=>'2',21=>'1',31=>'1',41=>'1',51=>'1',71=>'',81=>'',91=>'',101=>'',111=>'2',118=>'1',131=>'',141=>'',220=>'',224=>''],
@@ -53,16 +69,16 @@
                 'modificationValue'=>[1=>'-1',11=>'',14=>'-1',21=>'-1',31=>'-1',41=>'-1',51=>'-1',71=>'',81=>'',91=>'',101=>'',111=>'-1',118=>'-1',131=>'',141=>'',220=>'-3',224=>'-3']
             ],
             [
-                'E'=>'E 지도성',
+                'type'=>'Leadership',
                 'questionSet'=>[9,19,29,49,69,79,89,99,109,119,129,138,139,149,150],
-                'correctAnswer'=>[9=>'',19=>'',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'',149=>'',150=>''],
+                'correctAnswer'=>[9=>'2',19=>'2',29=>'1',49=>'1',69=>'2',79=>'1',89=>'1',99=>'2',109=>'2',119=>'2',129=>'2',138=>'2',139=>'2',149=>'2',150=>'1'],
                 'answerShape'=>[9=>'',19=>'',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'',149=>'',150=>''],
-                'shapeModification'=>[9=>'',19=>'',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'',149=>'',150=>''],
+                'shapeModification'=>[9=>'2',19=>'1',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'2',149=>'1',150=>'1'],
                 'modificaitonConversionToActual'=>[9=>'',19=>'',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'',149=>'',150=>''],
                 'modificationValue'=>[9=>'',19=>'',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'',149=>'',150=>'']
             ],
             [
-                'F'=>'F 감정상태',
+                'type'=>'Emtional State',
                 'questionSet'=>[5,17,27,37,47,55,57,61,67,77,97,107,117,127,147,214,228,209,216,213],
                 'correctAnswer'=>[5=>'',17=>'',27=>'',37=>'',47=>'',55=>'',57=>'',61=>'',67=>'',77=>'',97=>'',107=>'',117=>'',127=>'',147=>'',214=>'',228=>'',209=>'',216=>'',213=>''],
                 'answerShape'=>[5=>'',17=>'',27=>'',37=>'',47=>'',55=>'',57=>'',61=>'',67=>'',77=>'',97=>'',107=>'',117=>'',127=>'',147=>'',214=>'',228=>'',209=>'',216=>'',213=>''],
@@ -71,7 +87,7 @@
                 'modificationValue'=>[5=>'',17=>'',27=>'',37=>'',47=>'',55=>'',57=>'',61=>'',67=>'',77=>'',97=>'',107=>'',117=>'',127=>'',147=>'',214=>'',228=>'',209=>'',216=>'',213=>'']
             ],
             [
-                'G'=>'G 집중력',
+                'type'=>'Concentration',
                 'questionSet'=>[7,15,35,45,65,75,85,95,105,115,125,55,135,145,87,215,219,227],
                 'correctAnswer'=>[7=>'',15=>'',35=>'',45=>'',65=>'',75=>'',85=>'',95=>'',105=>'',115=>'',125=>'',55=>'',135=>'',145=>'',87=>'',215=>'',219=>'',227=>''],
                 'answerShape'=>[7=>'',15=>'',35=>'',45=>'',65=>'',75=>'',85=>'',95=>'',105=>'',115=>'',125=>'',55=>'',135=>'',145=>'',87=>'',215=>'',219=>'',227=>''],
@@ -80,7 +96,7 @@
                 'modificationValue'=>[7=>'',15=>'',35=>'',45=>'',65=>'',75=>'',85=>'',95=>'',105=>'',115=>'',125=>'',55=>'',135=>'',145=>'',87=>'',215=>'',219=>'',227=>'']
             ],
             [
-                'H'=>'H 정서안정',
+                'type'=>'Emotional Stability',
                 'questionSet'=>[3,13,23,43,53,63,73,83,93,103113,59,133,132,143,210,222],
                 'correctAnswer'=>[3=>'',13=>'',23=>'',43=>'',53=>'',63=>'',73=>'',83=>'',93=>'',103=>'',113=>'',59=>'',133=>'',132=>'',143=>'',210=>'',222=>''],
                 'answerShape'=>[3=>'',13=>'',23=>'',43=>'',53=>'',63=>'',73=>'',83=>'',93=>'',103=>'',113=>'',59=>'',133=>'',132=>'',143=>'',210=>'',222=>''],
@@ -89,7 +105,7 @@
                 'modificationValue'=>[3=>'',13=>'',23=>'',43=>'',53=>'',63=>'',73=>'',83=>'',93=>'',103=>'',113=>'',59=>'',133=>'',132=>'',143=>'',210=>'',222=>'']
             ],
             [
-                'I'=>'I 준법성',
+                'type'=>'Compliance',
                 'questionSet'=>[2,12,22,32,42,52,62,72,82,88,92,102,112,122,142,218,207,211],
                 'correctAnswer'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'',88=>'',92=>'',102=>'',112=>'',122=>'',142=>'',218=>'',207=>'',211=>''],
                 'answerShape'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'',88=>'',92=>'',102=>'',112=>'',122=>'',142=>'',218=>'',207=>'',211=>''],
@@ -97,41 +113,43 @@
                 'modificaitonConversionToActual'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'',88=>'',92=>'',102=>'',112=>'',122=>'',142=>'',218=>'',207=>'',211=>''],
                 'modificationValue'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'',88=>'',92=>'',102=>'',112=>'',122=>'',142=>'',218=>'',207=>'',211=>'']
             ]
-        );
-        protected static $correctAnswer = [];
-        protected static $testMakerModification = [];
-        protected static $answerShape = [];
-        protected static $shapeModification = [];
-        protected static $numberOfCorrectAnswers = [];
-        protected static $convertOfValue = [];
-        protected static $theNumberOfHits = [];
+        ];
 
-        public function __constructor($inputArr){
+        protected $numberOfCorrectAnswers = [];
+        protected $theNumberOfHits = [];
+
+        public function __construct($inputArr){
 
         }
 
-        public function checkQuestionSet(){
-            $questionNum = 4; // The question number you want to check
-
-            $elementContainingQuestion = null; // Initialize a variable to store the matching element
-
-            foreach (self::$personalityElementsArr as $element) {
-                if (in_array($questionNum, $element['questionSet'])) {
-                    $elementContainingQuestion = $element;
-                    break; // Exit the loop once a match is found
-                }
-            }
-
-            if ($elementContainingQuestion !== null) {
-                // The $questionNum is present in the 'questionSet' of an element
-                // $elementContainingQuestion now holds the matching element
-                // You can access its data like $elementContainingQuestion['A'], $elementContainingQuestion['correctAnswer'], etc.
-                // You may want to do something with this element.
-                print_r($elementContainingQuestion);
-            } else {
-                // The $questionNum is not present in any 'questionSet'
-                echo "Question $questionNum does not belong to any element.";
+        protected function getNumberOfCorrectAnswer($modifiedAnswer,  $answerShape){
+            if($modifiedAnswer === $answerShape){
+                return '-1';
+            }else{
+                return '0';
             }
         }
+
+        protected function getNumberOfHit($correctAnswer, $modifiedAnswer){
+            if($correctAnswer === $modifiedAnswer){
+                return 'true';
+            }else{
+                return 'false';
+            }
+        }
+
+        protected function getTotalModifiedValue($modifiedValueArr){
+            return array_sum(array_filter($modifiedValueArr,'is_numeric'));
+        }
+
+        protected function getTotalNumberOfHits($numberOfHitsArr){
+            $counts = array_count_values($numberOfHitsArr);            
+            return isset($counts['true']) ? $counts['true'] : 0;
+        }
+
+        protected function createPersonalityValues(){
+
+        }
+
     }
 ?>

@@ -1,8 +1,8 @@
 <?php
 // this class aims to modify the user answer based on given algorithm
 class Conversation{
-    public $answer;
-    public $qNum;
+    protected $answersArr;
+    protected $qNum;
 
     protected static $questionAlgoArr1 = [1,2,4,6,8,9,12,14,16,18,19,22,26,27,33,35,36,38,39,43,44,46,49,52,58,59,63,64,66,69,74,75,76,79,81,82,83,84,87,89,91,92,93,96,98,99,102,104,109,111,116,119,124,125,126,129,131,136,137,138,139,141,144,148,149];
 
@@ -10,50 +10,51 @@ class Conversation{
 
     protected static $questionAlgoArr3 = [10,20,30,40,50,60,70,80,90,100,110,120,121,123,130,140];
 
-    protected static $modifiedAnswer = [];
+    protected $modifiedAnswer = [];
 
-    public function __constructor($inputNum,$inputAnswer){
-        $this->answer = $inputAnswer;
-        $this->qNum = $inputNum;
+    public function __construct($answers){
+        $this->answersArr = $answers;
     }
 
-    // determine answer conversion based on the question number category
-    function answerFormula1(){
-        if($this->answer <= 3){
+    // Determine answer conversion based on the question number category
+    protected function answerFormula1($answer){
+        if ($answer <= 3){
             return '1';
         }else{
             return '2';
         }
     }
 
-    function answerFormula2(){
-        if($this->answer >= 3){
+    protected function answerFormula2($answer){
+        if ($answer >= 3){
             return '2';
         }else{
             return '1';
         }
     }
 
-    function answerFormula3(){
-        if($this->answer === 0){
+    protected function answerFormula3($answer){
+        if ($answer === 0){
             return '0';
         }else{
             return '0';
-        }
-    }
-    
-    function checkAnswerSet(){
-        if (in_array($this->qNum, self::$questionAlgoArr1)) {
-            $this->answerFormula1();
-        } elseif(in_array($this->qNum, self::$questionAlgoArr2)) {
-            $this->answerFormula2();
-        }else{
-            $this->answerFormula3();
         }
     }
 
-    function modifiedAnswer(){
-        
+    public function saveModifiedAnswer(){
+        foreach ($this->answersArr as $value) {
+            if (in_array($value['num'], self::$questionAlgoArr1)) {
+                $newData = ['num'=>$value['num'],'modifiedAnswer' => $this->answerFormula1($value['answer'])];
+                $this->modifiedAnswer[] = $newData;
+            } elseif(in_array($value['num'], self::$questionAlgoArr2)) {
+                $newData = ['num'=>$value['num'],'modifiedAnswer' => $this->answerFormula2($value['answer'])];
+                $this->modifiedAnswer[] = $newData;
+            } else {
+                $newData = ['num'=>$value['num'],'modifiedAnswer' => $this->answerFormula3($value['answer'])];
+                $this->modifiedAnswer[] = $newData;
+            }
+        }
+        return $this->modifiedAnswer;
     }
 }
 
