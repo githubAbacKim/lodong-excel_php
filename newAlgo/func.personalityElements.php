@@ -26,88 +26,167 @@
         protected static $personnalityResultLabel1 = ['Deligence', 'Responsibility', 'Cooperation', 'Autonomy','Leadership', 'EmtionalState', 'Concentration', 'EmotionalStability', 'Compliance', 'talentSynthesis'];
         protected static $personnalityResultLabel2 = ['ConfidenceLevel', 'TestAttitude', 'TestStatus', 'NonResponseRate', 'ResponseConsistency', 'Antisocial'];
 
+        protected static $personalityElementArr = [
+            ['type'=>'','num'=>'','correctAnswer'=>'','answerShape'=>'','modificationConversionToActual'=>'','modificationValue'=>'']
+        ];
         protected static $personalityElementsArr = [
-            [
-                'type'=>'Deligence',
-                'questionSet'=>[4,24,25,34,44,54,64,74,84,94,104,114,124,134,144,212,226],
-                'correctAnswer'=>[4=>'1',24=>'2',25=>'2',34=>'1',44=>'1',54=>'2',64=>'1',74=>'1',84=>'1',94=>'2',104=>'1',114=>'2',124=>'1',134=>'2',144=>'1',212=>'',226=>''],
-                'answerShape'=>[4=>'2',24=>'1',25=>'1',34=>'',44=>'2',54=>'1',64=>'',74=>'',84=>'',94=>'',104=>'2',114=>'1',124=>'2',134=>'1',144=>'2',212=>'',226=>''],
-                'shapeModification'=>[4=>'',24=>'',25=>'',34=>'',44=>'',54=>'',64=>'',74=>'',84=>'',94=>'',104=>'',114=>'',124=>'',134=>'',144=>'',212=>'1',226=>'2'],
-                'modificaitonConversionToActual'=>[4=>'',24=>'',25=>'',34=>'',44=>'',54=>'',64=>'',74=>'',84=>'',94=>'',104=>'',114=>'',124=>'',134=>'',144=>'',212=>'2',226=>'4'],
-                'modificationValue'=>[4=>'-1',24=>'-1',25=>'-1',34=>'',44=>'-1',54=>'-2',64=>'',74=>'',84=>'',94=>'',104=>'-1',114=>'-1',124=>'-1',134=>'-2',144=>'-1',212=>'-3',226=>'-3']
-            ],
-            [
-                'type'=>'Responsibility',
-                'questionSet'=>[6,16,26,36,46,56,66,76,96,106,116,126,136,146,137,208,217,221],
-                'correctAnswer'=>[6=>'1',16=>'1',26=>'1',36=>'1',46=>'1',56=>'2',66=>'1',76=>'1',96=>'1',106=>'2',116=>'1',1261=>'1',136=>'1',146=>'2',137=>'1',208=>'',217=>'',221=>''],
-                'answerShape'=>[6=>'',16=>'',26=>'',36=>'',46=>'',56=>'1',66=>'1',76=>'1',96=>'1',106=>'1',116=>'1',126=>'1',136=>'1',146=>'1',137=>'',208=>'',217=>'',221=>''],
-                'shapeModification'=>[6=>'',16=>'',26=>'',36=>'',46=>'',56=>'',66=>'',76=>'',96=>'',106=>'',116=>'',126=>'',136=>'',146=>'',137=>'',208=>'3',217=>'3',221=>'2'],
-                'modificaitonConversionToActual'=>[6=>'',16=>'',26=>'',36=>'',46=>'',56=>'',66=>'',76=>'',96=>'',106=>'',116=>'',126=>'',136=>'',146=>'',137=>'',208=>'1',217=>'5',221=>'3'],
-                'modificationValue'=>[6=>'',16=>'',26=>'',36=>'',46=>'',56=>'-3',66=>'-1',76=>'-1',96=>'-1',106=>'-2',116=>'-2',126=>'-1',136=>'-2',146=>'-4',137=>'',208=>'-3',217=>'-3',221=>'-3']
-            ],
-            [
-                'type'=>'Cooperation',
-                'questionSet'=>[8,18,28,33,38,39,48,58,68,78,98,108,128,132,148,225,223],
-                'correctAnswer'=>[8=>'1',18=>'1',28=>'2',33=>'1',38=>'1',39=>'1',48=>'2',58=>'1',68=>'1',78=>'2',98=>'1',108=>'2',128=>'2',132=>'2',148=>'1',225=>'',223=>''],
-                'answerShape'=>[8=>'2',18=>'2',28=>'1',33=>'2',38=>'',39=>'',48=>'1',58=>'1',68=>'',78=>'',98=>'',108=>'1',128=>'',132=>'',148=>'',225=>'',223=>''],
-                'shapeModification'=>[8=>'',18=>'',28=>'',33=>'',38=>'',39=>'',48=>'',58=>'',68=>'',78=>'',98=>'',108=>'',128=>'',132=>'',148=>'',225=>'2',223=>'2'],
-                'modificaitonConversionToActual'=>[8=>'',18=>'',28=>'',33=>'',38=>'',39=>'',48=>'',58=>'',68=>'',78=>'',98=>'',108=>'',128=>'',132=>'',148=>'',225=>'5',223=>'4'],
-                'modificationValue'=>[8=>'-1',18=>'-2',28=>'-2',33=>'-1',38=>'',39=>'',48=>'-1',58=>'-1',68=>'',78=>'',98=>'',108=>'-2',128=>'',132=>'',148=>'',225=>'-3',223=>'-3']
-            ],
-            [
-                'type'=>'Autonomy',
-                'questionSet'=>[1,11,14,21,31,41,51,71,81,91,101,111,118,131,141,220,224],
-                'correctAnswer'=>[1=>'1',11=>'1',14=>'1',21=>'2',31=>'2',41=>'2',51=>'2',71=>'2',81=>'1',91=>'2',101=>'2',111=>'1',118=>'2',131=>'1',141=>'1',220=>'',224=>''],
-                'answerShape'=>[1=>'2',11=>'',14=>'2',21=>'1',31=>'1',41=>'1',51=>'1',71=>'',81=>'',91=>'',101=>'',111=>'2',118=>'1',131=>'',141=>'',220=>'',224=>''],
-                'shapeModification'=>[1=>'',11=>'',14=>'',21=>'',31=>'',41=>'',51=>'',71=>'',81=>'',91=>'',101=>'',111=>'',118=>'',131=>'',141=>'',220=>'1',224=>'1'],
-                'modificaitonConversionToActual'=>[1=>'',11=>'',14=>'',21=>'',31=>'',41=>'',51=>'',71=>'',81=>'',91=>'',101=>'',111=>'',118=>'',131=>'',141=>'',220=>'5',224=>'5'],
-                'modificationValue'=>[1=>'-1',11=>'',14=>'-1',21=>'-1',31=>'-1',41=>'-1',51=>'-1',71=>'',81=>'',91=>'',101=>'',111=>'-1',118=>'-1',131=>'',141=>'',220=>'-3',224=>'-3']
-            ],
-            [
-                'type'=>'Leadership',
-                'questionSet'=>[9,19,29,49,69,79,89,99,109,119,129,138,139,149,150],
-                'correctAnswer'=>[9=>'2',19=>'2',29=>'1',49=>'1',69=>'2',79=>'1',89=>'1',99=>'2',109=>'2',119=>'2',129=>'2',138=>'2',139=>'2',149=>'2',150=>'1'],
-                'answerShape'=>[9=>'',19=>'',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'',149=>'',150=>''],
-                'shapeModification'=>[9=>'2',19=>'1',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'2',149=>'1',150=>'1'],
-                'modificaitonConversionToActual'=>[9=>'-2',19=>'-1',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'-1',149=>'-2',150=>'-3'],
-                'modificationValue'=>[9=>'',19=>'',29=>'',49=>'',69=>'',79=>'',89=>'',99=>'',109=>'',119=>'',129=>'',138=>'',139=>'',149=>'',150=>'']
-            ],
-            [
-                'type'=>'Emtional State',
-                'questionSet'=>[5,17,27,37,47,55,57,61,67,77,97,107,117,127,147,214,228,209,216,213],
-                'correctAnswer'=>[5=>'2',17=>'2',27=>'2',37=>'2',47=>'2',55=>'2',57=>'2',61=>'2',67=>'2',77=>'2',97=>'2',107=>'2',117=>'2',127=>'2',147=>'2',214=>'',228=>'',209=>'',216=>'',213=>''],
-                'answerShape'=>[5=>'1',17=>'',27=>'',37=>'',47=>'',55=>'1',57=>'1',61=>'',67=>'1',77=>'1',97=>'1',107=>'1',117=>'1',127=>'1',147=>'1',214=>'',228=>'',209=>'',216=>'',213=>''],
-                'shapeModification'=>[5=>'',17=>'',27=>'',37=>'',47=>'',55=>'',57=>'',61=>'',67=>'',77=>'',97=>'',107=>'',117=>'',127=>'',147=>'',214=>'1',228=>'3',209=>'1',216=>'1',213=>'1'],
-                'modificaitonConversionToActual'=>[5=>'',17=>'',27=>'',37=>'',47=>'',55=>'',57=>'',61=>'',67=>'',77=>'',97=>'',107=>'',117=>'',127=>'',147=>'',214=>'4',228=>'5',209=>'2',216=>'3',213=>'5'],
-                'modificationValue'=>[5=>'-1',17=>'',27=>'',37=>'',47=>'',55=>'-1',57=>'-2',61=>'',67=>'-1',77=>'-2',97=>'-2',107=>'-2',117=>'-1',127=>'-2',147=>'-2',214=>'-2',228=>'-2',209=>'-2',216=>'-2',213=>'-2']
-            ],
-            [
-                'type'=>'Concentration',
-                'questionSet'=>[7,15,35,45,65,75,85,95,105,115,125,55,135,145,87,215,219,227],
-                'correctAnswer'=>[7=>'2',15=>'2',35=>'2',45=>'2',65=>'2',75=>'2',85=>'2',95=>'2',105=>'2',115=>'2',125=>'2',55=>'2',135=>'2',145=>'2',87=>'1',215=>'',219=>'',227=>''],
-                'answerShape'=>[7=>'',15=>'1',35=>'1',45=>'',65=>'',75=>'',85=>'',95=>'1',105=>'',115=>'',125=>'',55=>'',135=>'',145=>'',87=>'',215=>'',219=>'',227=>''],
-                'shapeModification'=>[7=>'',15=>'',35=>'',45=>'',65=>'',75=>'',85=>'',95=>'',105=>'',115=>'',125=>'',55=>'',135=>'',145=>'',87=>'',215=>'3',219=>'4',227=>'2'],
-                'modificaitonConversionToActual'=>[7=>'',15=>'',35=>'',45=>'',65=>'',75=>'',85=>'',95=>'',105=>'',115=>'',125=>'',55=>'',135=>'',145=>'',87=>'',215=>'5',219=>'5',227=>'3'],
-                'modificationValue'=>[7=>'',15=>'-2',35=>'-1',45=>'',65=>'',75=>'',85=>'',95=>'-2',105=>'',115=>'',125=>'',55=>'',135=>'',145=>'',87=>'',215=>'-3',219=>'-3',227=>'-3']
-            ],
-            [
-                'type'=>'Emotional Stability',
-                'questionSet'=>[3,13,23,43,53,63,73,83,93,103113,59,133,132,143,210,222],
-                'correctAnswer'=>[3=>'2',13=>'2',23=>'2',43=>'1',53=>'2',63=>'2',73=>'2',83=>'1',93=>'1',103=>'2',113=>'2',59=>'1',133=>'2',132=>'2',143=>'2',210=>'',222=>''],
-                'answerShape'=>[3=>'1',13=>'',23=>'',43=>'',53=>'1',63=>'',73=>'1',83=>'',93=>'',103=>'',113=>'1',59=>'',133=>'',132=>'',143=>'1',210=>'',222=>''],
-                'shapeModification'=>[3=>'',13=>'',23=>'',43=>'',53=>'',63=>'',73=>'',83=>'',93=>'',103=>'',113=>'',59=>'',133=>'',132=>'',143=>'',210=>'2',222=>'2'],
-                'modificaitonConversionToActual'=>[3=>'',13=>'',23=>'',43=>'',53=>'',63=>'',73=>'',83=>'',93=>'',103=>'',113=>'',59=>'',133=>'',132=>'',143=>'',210=>'4',222=>'5'],
-                'modificationValue'=>[3=>'-2',13=>'',23=>'',43=>'',53=>'-1',63=>'',73=>'-1',83=>'',93=>'',103=>'',113=>'-3',59=>'',133=>'',132=>'',143=>'-1',210=>'-3',222=>'-3']
-            ],
-            [
-                'type'=>'Compliance',
-                'questionSet'=>[2,12,22,32,42,52,62,72,82,88,92,102,112,122,142,218,207,211],
-                'correctAnswer'=>[2=>'1',12=>'1',22=>'1',32=>'2',42=>'2',52=>'1',62=>'2',72=>'2',82=>'1',88=>'2',92=>'1',102=>'1',112=>'2',122=>'2',142=>'2',218=>'',207=>'',211=>''],
-                'answerShape'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'1',88=>'',92=>'',102=>'',112=>'',122=>'1',142=>'',218=>'',207=>'',211=>''],
-                'shapeModification'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'',88=>'',92=>'',102=>'',112=>'',122=>'',142=>'',218=>'2',207=>'2',211=>'1'],
-                'modificaitonConversionToActual'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'',88=>'',92=>'',102=>'',112=>'',122=>'',142=>'',218=>'4',207=>'4',211=>'2'],
-                'modificationValue'=>[2=>'',12=>'',22=>'',32=>'',42=>'',52=>'',62=>'',72=>'',82=>'-1',88=>'',92=>'',102=>'',112=>'',122=>'-2',142=>'',218=>'-3',207=>'-3',211=>'-3']
-            ]
+            ['type'=>'deligence','num'=>4,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>24,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>25,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>34,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'deligence','num'=>44,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>54,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'deligence','num'=>64,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'deligence','num'=>74,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'deligence','num'=>84,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'deligence','num'=>94,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'deligence','num'=>104,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>114,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>124,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>134,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'deligence','num'=>144,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'deligence','num'=>212,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>2,'modificationValue'=>-3],
+            ['type'=>'deligence','num'=>226,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>4,'modificationValue'=>-3],
+            ['type'=>'responsibility','num'=>6,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'responsibility','num'=>16,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'responsibility','num'=>26,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'responsibility','num'=>36,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'responsibility','num'=>46,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'responsibility','num'=>56,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-3],
+            ['type'=>'responsibility','num'=>66,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'responsibility','num'=>76,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'responsibility','num'=>96,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'responsibility','num'=>106,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'responsibility','num'=>116,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'responsibility','num'=>126,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'responsibility','num'=>136,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'responsibility','num'=>146,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-4],
+            ['type'=>'responsibility','num'=>137,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'responsibility','num'=>208,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>3,'modificationConversionToActual'=>1,'modificationValue'=>-3],
+            ['type'=>'responsibility','num'=>217,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>3,'modificationConversionToActual'=>5,'modificationValue'=>-3],
+            ['type'=>'responsibility','num'=>221,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>3,'modificationValue'=>-3],
+            ['type'=>'cooperation','num'=>8,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'cooperation','num'=>18,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'cooperation','num'=>28,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'cooperation','num'=>33,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'cooperation','num'=>38,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>39,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>48,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'cooperation','num'=>58,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'cooperation','num'=>68,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>78,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>98,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>108,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'cooperation','num'=>128,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>132,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>148,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'cooperation','num'=>225,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>5,'modificationValue'=>-3],
+            ['type'=>'cooperation','num'=>223,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>4,'modificationValue'=>-3],
+            ['type'=>'autonomy','num'=>1,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>11,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'autonomy','num'=>14,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>21,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>31,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>41,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>51,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>71,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'autonomy','num'=>81,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'autonomy','num'=>91,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'autonomy','num'=>101,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'autonomy','num'=>111,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>118,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'autonomy','num'=>131,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'autonomy','num'=>141,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'autonomy','num'=>220,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>5,'modificationValue'=>-3],
+            ['type'=>'autonomy','num'=>224,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>5,'modificationValue'=>-3],
+            ['type'=>'leadership','num'=>9,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>-2,'modificationValue'=>''],
+            ['type'=>'leadership','num'=>19,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>-1,'modificationValue'=>''],
+            ['type'=>'leadership','num'=>29,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>49,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>69,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>79,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>89,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>99,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>109,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>119,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>129,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>138,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'leadership','num'=>139,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>-1,'modificationValue'=>''],
+            ['type'=>'leadership','num'=>149,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>-2,'modificationValue'=>''],
+            ['type'=>'leadership','num'=>150,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>-3,'modificationValue'=>''],
+            ['type'=>'emotionalState','num'=>5,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'emotionalState','num'=>17,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalState','num'=>27,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalState','num'=>37,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalState','num'=>47,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalState','num'=>55,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'emotionalState','num'=>57,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>61,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalState','num'=>67,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'emotionalState','num'=>77,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>97,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>107,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>117,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'emotionalState','num'=>127,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>147,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>214,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>4,'modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>228,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>3,'modificationConversionToActual'=>5,'modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>209,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>2,'modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>216,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>3,'modificationValue'=>-2],
+            ['type'=>'emotionalState','num'=>213,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>5,'modificationValue'=>-2],
+            ['type'=>'concentration','num'=>7,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>15,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'concentration','num'=>35,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'concentration','num'=>45,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>65,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>75,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>85,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>95,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'concentration','num'=>105,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>115,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>125,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>55,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>135,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>145,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>87,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'concentration','num'=>215,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>3,'modificationConversionToActual'=>5,'modificationValue'=>-3],
+            ['type'=>'concentration','num'=>219,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>4,'modificationConversionToActual'=>5,'modificationValue'=>-3],
+            ['type'=>'concentration','num'=>227,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>3,'modificationValue'=>-3],
+            ['type'=>'emotionalStability','num'=>3,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'emotionalStability','num'=>13,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>23,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>43,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>53,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'emotionalStability','num'=>63,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>73,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'emotionalStability','num'=>83,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>93,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>103,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>113,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-3],
+            ['type'=>'emotionalStability','num'=>59,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>133,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>132,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'emotionalStability','num'=>143,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'emotionalStability','num'=>210,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>4,'modificationValue'=>-3],
+            ['type'=>'emotionalStability','num'=>222,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>5,'modificationValue'=>-3],
+            ['type'=>'compliance','num'=>2,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>12,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>22,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>32,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>42,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>52,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>62,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>72,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>82,'correctAnswer'=>1,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
+            ['type'=>'compliance','num'=>88,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>92,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>102,'correctAnswer'=>1,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>112,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>122,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-2],
+            ['type'=>'compliance','num'=>142,'correctAnswer'=>2,'answerShape'=>'','shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>''],
+            ['type'=>'compliance','num'=>218,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>4,'modificationValue'=>-3],
+            ['type'=>'compliance','num'=>207,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>2,'modificationConversionToActual'=>4,'modificationValue'=>-3],
+            ['type'=>'compliance','num'=>211,'correctAnswer'=>'','answerShape'=>'','shapeModification'=>1,'modificationConversionToActual'=>2,'modificationValue'=>-3]
         ];
 
         protected $numberOfCorrectAnswers = [];
@@ -180,42 +259,17 @@
 
         }
 
-        protected function findPesonality(){
+        public function findPesonality(){
             // determine what type of personality and add data to the array variable for the specified personality
             $modifiedAnswer = parent::saveModifiedAnswer();
-            foreach ($personalityElementsArr as $personalityElement) {
-                $type = $personalityElement['type'];
-                $questionSet = $personalityElement['questionSet'];
+            foreach (self::$personalityElementsArr as $personalityElement) {
+               
                 
-                // Initialize arrays for correctAnswer and modifiedAnswer
-                $correctAnswer = [];
-                $modifiedAnswer = [];
-                
-                foreach ($questionSet as $questionNum) {
-                    // Search for the questionNum in $modifiedAnswer
-                    foreach ($result as $value) {
-                        if ($value['num'] == $questionNum) {
-                            // Add the corresponding values to correctAnswer and modifiedAnswer
-                            $correctAnswer[$questionNum] = $personalityElement['correctAnswer'][$questionNum];
-                            $modifiedAnswer[$questionNum] = $value['modifiedAnswer'];
-                            break; // Break the inner loop once found
-                        }
-                    }
-                }
-                
-                // Create the personalityData array
-                $personalityData = [
-                    'type' => $type,
-                    'correctAnswer' => $correctAnswer,
-                    'modifiedAnswer' => $modifiedAnswer,
-                ];
-                
-                // Add the personalityData array to the $personalitiesData array
-                $personalitiesData[] = $personalityData;
             }
 
             // Now $personalitiesData contains the desired structure
-            print_r($personalitiesData);
+             //return $personalitiesData;
+             
         }
 
         protected function savePersonalityResult(){
@@ -225,12 +279,12 @@
         protected function savePersonalityActualScore(){
             // save the result for the actual score of all personalities.  Diligence, responsibility, cooperation, autonomy, leadership, emotional state, concentration, emotional stability, compliance, talent synthesis
         }
-
         public function testFunction(){
             $modifiedAnswer = parent::saveModifiedAnswer();
 
             return $modifiedAnswer;
         }
+        
 
     }
 ?>
