@@ -14,8 +14,10 @@
     // array of sample answers
     // print_r($arrayAnswers);
 
-    $modifiedAnswers = new Conversation($arrayAnswers);
-    $result = $modifiedAnswers->saveModifiedAnswer();
+    // $modifiedAnswers = new Conversation($arrayAnswers);
+    $modifiedAnswers = new PersonalityElem($arrayAnswers);
+
+    $result = $modifiedAnswers->testFunction();
     
     foreach ($result as $value) {
         echo $value['num'] .'-'. $value['modifiedAnswer'].'<br>';
