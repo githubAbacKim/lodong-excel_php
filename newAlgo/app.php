@@ -19,8 +19,18 @@
 
     $result = $modifiedAnswers->testFunction();
     
-    foreach ($result as $value) {
+    /* foreach ($result as $value) {
         echo $value['num'] .'-'. $value['modifiedAnswer'].'<br>';
+    } */
+
+    $testPersonality = $modifiedAnswers->findPersonality();
+    function compareByType($a, $b) {
+        return strcmp($a['type'], $b['type']);
+    }
+    usort($testPersonality,'compareByType');
+
+    foreach ($testPersonality as $value) {
+        echo $value['type'].'-'.$value['correctAnswer'].'-'.$value['numberOfHits'].'<br>';
     }
 
 ?>

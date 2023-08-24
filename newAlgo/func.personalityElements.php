@@ -1,20 +1,6 @@
 <?php
     class PersonalityElem extends Conversation{
         public $val;
-
-        // array set for question belongs to what personality.
-        /* protected static $personalityElementsArr = array(
-            array('A'=>'A 근면성','questionSet'=>array(24,25,34,44,54,64,74,84,94,104,114,124,134,144,212,226)),
-            array('B'=>'B 책임감','questionSet'=>array(6,16,26,36,46,56,66,76,96,106,116,126,136,146,137,208,217,221)),
-            array('C'=>'C 협동성','questionSet'=>array(8,18,28,33,38,39,48,58,68,78,98,108,128,132,148,225,223)),
-            array('D'=>'D 자주성','questionSet'=>array(1,11,14,21,31,41,51,71,81,91,101,111,118,131,141,220,224)),
-            array('E'=>'E 지도성','questionSet'=>array(9,19,29,49,69,79,89,99,109,119,129,138,139,149,150)),
-            array('F'=>'F 감정상태','questionSet'=>array(5,17,27,37,47,55,57,61,67,77,97,107,117,127,147,214,228,209,216,213)),
-            array('G'=>'G 집중력','questionSet'=>array(7,15,35,45,65,75,85,95,105,115,125,55,135,145,87,215,219,227)),
-            array('H'=>'H 정서안정','questionSet'=>array(3,13,23,43,53,63,73,83,93,103113,59,133,132,143,210,222)),
-            array('I'=>'I 준법성','questionSet'=>array(2,12,22,32,42,52,62,72,82,88,92,102,112,122,142,218,207,211))
-        ); */
-
         // this will contain 
         protected $personalitiesData = [];
 
@@ -26,9 +12,7 @@
         protected static $personnalityResultLabel1 = ['Deligence', 'Responsibility', 'Cooperation', 'Autonomy','Leadership', 'EmtionalState', 'Concentration', 'EmotionalStability', 'Compliance', 'talentSynthesis'];
         protected static $personnalityResultLabel2 = ['ConfidenceLevel', 'TestAttitude', 'TestStatus', 'NonResponseRate', 'ResponseConsistency', 'Antisocial'];
 
-        protected static $personalityElementArr = [
-            ['type'=>'','num'=>'','correctAnswer'=>'','answerShape'=>'','modificationConversionToActual'=>'','modificationValue'=>'']
-        ];
+
         protected static $personalityElementsArr = [
             ['type'=>'deligence','num'=>4,'correctAnswer'=>1,'answerShape'=>2,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
             ['type'=>'deligence','num'=>24,'correctAnswer'=>2,'answerShape'=>1,'shapeModification'=>'','modificationConversionToActual'=>'','modificationValue'=>-1],
@@ -196,18 +180,18 @@
             parent::__construct($answers);
         }
 
-        protected function getNumberOfCorrectAnswer($modifiedAnswer,  $answerShape){
-            if($modifiedAnswer === $answerShape){
-                return '-1';
-            }else{
-                return '0';
+        protected function getNumberOfCorrectAnswer($modifiedAnswer, $answerShape){
+            if ($modifiedAnswer == $answerShape) {
+                return -1;
+            } else {
+                return 0;
             }
         }
-
+        
         protected function getNumberOfHit($correctAnswer, $modifiedAnswer){
-            if($correctAnswer === $modifiedAnswer){
+            if ($correctAnswer == $modifiedAnswer) {
                 return 'true';
-            }else{
+            } else {
                 return 'false';
             }
         }
@@ -259,17 +243,38 @@
 
         }
 
-        public function findPesonality(){
-            // determine what type of personality and add data to the array variable for the specified personality
+        public function findPersonality() {
+            // Initialize the result array
+            $personalityResultArr = [];
+        
+            // Get the modified answers
             $modifiedAnswer = parent::saveModifiedAnswer();
-            foreach (self::$personalityElementsArr as $personalityElement) {
-               
-                
+        
+            foreach ($modifiedAnswer as $modifiedAnswerValue) {
+                $num = $modifiedAnswerValue['num'];
+                $modifiedAnswerValue = $modifiedAnswerValue['modifiedAnswer'];
+        
+                foreach (self::$personalityElementsArr as $personalityElement) {
+                    if ($personalityElement['num'] == $num) {
+                        $correctAnswer = $this->getNumberOfCorrectAnswer($modifiedAnswerValue, $personalityElement['answerShape']);
+                        $numberOfHit = $this->getNumberOfHit($personalityElement['correctAnswer'], $modifiedAnswerValue);
+                        // Add data to the result array
+                        $personalityResultArr[] = [
+                            'type' => $personalityElement['type'],
+                            'num' => $num,
+                            'modificationValue'=>$personalityElement['modificationValue'],
+                            'correctAnswer' => $correctAnswer,
+                            'numberOfHits' => $numberOfHit,
+                        ];
+        
+                        // Break out of the inner loop since you found a match
+                        break;
+                    }
+                }
             }
-
-            // Now $personalitiesData contains the desired structure
-             //return $personalitiesData;
-             
+        
+            // Now $personalityResultArr contains the desired structure
+            return $personalityResultArr;
         }
 
         protected function savePersonalityResult(){
