@@ -33,4 +33,6 @@
         echo $value['type'].'-'.$value['correctAnswer'].'-'.$value['numberOfHits'].'<br>';
     }
 
+    $initResult = $modifiedAnswers->savePersonalityInitResults();
+    echo print_r($initResult)
 ?>
