@@ -284,6 +284,42 @@
         protected function savePersonalityActualScore(){
             // save the result for the actual score of all personalities.  Diligence, responsibility, cooperation, autonomy, leadership, emotional state, concentration, emotional stability, compliance, talent synthesis
         }
+
+        protected function savePersonalInitResult(){
+            // Initialize the result array
+            $savePersonalityInitResult = [];
+        
+            // Get the modified answers
+            $modifiedAnswer = parent::saveModifiedAnswer();
+        
+            foreach ($modifiedAnswer as $modifiedAnswerValue) {
+                $num = $modifiedAnswerValue['num'];
+                $modifiedAnswerValue = $modifiedAnswerValue['modifiedAnswer'];
+                $sumModifiedValue = 0;
+                $totalNumberOfHits = 0;
+                foreach (self::$personalityElementsArr as $personalityElement) {
+                    if ($personalityElement['num'] == $num) {
+                        $correctAnswer = $this->getNumberOfCorrectAnswer($modifiedAnswerValue, $personalityElement['answerShape']);
+                        $numberOfHit = $this->getNumberOfHit($personalityElement['correctAnswer'], $modifiedAnswerValue);
+                        // Add data to the result array
+                        $personalityResultArr[] = [
+                            'type' => $personalityElement['type'],
+                            'num' => $num,
+                            'modificationValue'=>$personalityElement['modificationValue'],
+                            'correctAnswer' => $correctAnswer,
+                            'numberOfHits' => $numberOfHit,
+                        ];
+                        
+                        // Break out of the inner loop since you found a match
+                        break;
+                    }
+                }
+            }
+        
+            // Now $personalityResultArr contains the desired structure
+            return $personalityResultArr;
+        }
+
         public function testFunction(){
             $modifiedAnswer = parent::saveModifiedAnswer();
 
