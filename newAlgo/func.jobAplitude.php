@@ -3,35 +3,44 @@
         protected static $jobAptitudeData = [
             [
                 'type'=>'management', 
-                'question'=>[70,110,150,152,155,183,181]
+                'question'=>[70,110,150,152,155,183,181],
+                'scoreRef'=>[ 'cooperation','autonomy']
             ],
             [
                 'type'=>'safety', 
-                'question'=>[157,177,180,175,167,159,'']
+                'question'=>[157,177,180,175,167,159,''],
+                'scoreRef'=>[  'responsibility','cooperation','emotional stability']
+                
             ],
             [
                 'type'=>'accounting', 
-                'question'=>[40,60,90,121,162,165,'']
+                'question'=>[40,60,90,121,162,165,''],
+                'scoreRef'=>['deligence','compliance']
             ],
             [
                 'type'=>'administration', 
-                'question'=>[20,80,86,140,178,160,156]
+                'question'=>[20,80,86,140,178,160,156],
+                'scoreRef'=>[ 'leadership','compliance']
             ],
             [
                 'type'=>'technique', 
-                'question'=>[10,30,50,130,151,154,'']
+                'question'=>[10,30,50,130,151,154,''],
+                'scoreRef'=>[ 'responsibility','emotional stability']
             ],
             [
                 'type'=>'research', 
-                'question'=>[169,174,163,172,164,161,'']
+                'question'=>[169,174,163,172,164,161,''],
+                'scoreRef'=>[ 'deligence','responsibility','leadership']
             ],
             [
                 'type'=>'it', 
-                'question'=>[100,120,153,184,171,179,'']
+                'question'=>[100,120,153,184,171,179,''],
+                'scoreRef'=>[ 'responsibility','compliance']
             ],
             [
                 'type'=>'manufacturing', 
-                'question'=>[182,173,176,168,170,158,'']
+                'question'=>[182,173,176,168,170,158,''],
+                'scoreRef'=>[ 'deligence','responsibility','emotional stability']
             ],
         ];
         
@@ -119,7 +128,7 @@
         }
 
         public function getPersonalityResult(){
-            $personalityResult = ['a deligence', 'b responsibility', 'c cooperation', 'd autonomy','e leadership', 'f emotional state', 'g concentration', 'h emotional stability', 'i compliance', 'talentSynthesis'];
+            $personalityResult = ['a deligence'=>, 'b responsibility', 'c cooperation', 'd autonomy','e leadership', 'f emotional state', 'g concentration', 'h emotional stability', 'i compliance', 'talentSynthesis'];
         }
 
 
