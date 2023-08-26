@@ -31,10 +31,15 @@
     }
     usort($testPersonality,'compareByType');
 
-    foreach ($testPersonality as $value) {
+    /* foreach ($testPersonality as $value) {
         echo $value['type'].'-'.$value['correctAnswer'].'-'.$value['numberOfHits'].'<br>';
-    }
+    } */
 
     $initResult = $modifiedAnswers->savePersonalityInitResults();
-    echo print_r($initResult)
+    // echo print_r($initResult)
+
+    $jobAptitude = new JobAptitude($arrayAnswers);
+    $resultJobAptitude = $jobAptitude->saveTakersAnswer();
+
+    echo print_r($resultJobAptitude);
 ?>

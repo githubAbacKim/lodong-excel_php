@@ -313,6 +313,10 @@
             $initResult = $this->savePersonalityInitResults();
         }
 
+        public function modifiedAnswer(){
+            return parent::saveModifiedAnswer();
+        }
+
         public function testFunction(){
             $modifiedAnswer = parent::saveModifiedAnswer();
 

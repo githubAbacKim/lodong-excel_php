@@ -1,5 +1,5 @@
 <?php
-    class JobAptitude extends Conversation{
+    class JobAptitude extends PersonalityElem{
         protected static $jobAptitudeData = [
             [
                 'type'=>'management', 
@@ -35,7 +35,6 @@
             ],
         ];
         
-
         protected static $jobAptitudeScoreRef = [
             ['numAnswer'=>0,'score'=>0],
             ['numAnswer'=>1,'score'=>0],
@@ -62,7 +61,7 @@
 
         protected function personalityAquisitionScore(){
             // Sample data representing the values in cells T4, Z4 to AB4
-            $t4Value = true; // Boolean value
+            $t4Value = 43; // Boolean value
             $z4ToAB4Values = [10, 20, 30, 40, 50]; // Integer values
 
             // Initialize variables to hold the sum and the count of integers
@@ -83,12 +82,12 @@
             // Calculate the final result by dividing the sum by 3
             $result = $sum / 3;
 
-            echo "Result: " . $result;
+            return $result;
         }
 
-        protected function saveTakersAnswer(){
+        public function saveTakersAnswer(){
             // initialize the modified answer from the conversation class
-            $modifiedAnswer = parent::saveModifiedAnswer();
+            $modifiedAnswer = parent::modifiedAnswer();
 
             // Initialize an empty array to store taker answers
             $takerAnswer = [];
@@ -115,6 +114,12 @@
                     'answers' => $answerArray,
                 ];
             }
+
+            return $takerAnswer;
+        }
+
+        public function getPersonalityResult(){
+            $personalityResult = ['a deligence', 'b responsibility', 'c cooperation', 'd autonomy','e leadership', 'f emotional state', 'g concentration', 'h emotional stability', 'i compliance', 'talentSynthesis'];
         }
 
 
