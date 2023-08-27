@@ -1,5 +1,5 @@
 <?php
-    class JobAptitude extends PersonalityElem{
+    class JobAptitude extends ConditionJobAptitude{
         protected static $jobAptitudeData = [
             [
                 'type'=>'management', 
@@ -55,7 +55,7 @@
             ['numAnswer'=>7,'score'=>96],
         ];
 
-        protected $takerAnswer = [];
+        protected static $jobAptitudeLabels = ['management','safety','accounting','administration','technique','research','it','manufacturing'];
 
         public function __construct($answers){
             parent::__construct($answers);
@@ -127,8 +127,18 @@
             return $takerAnswer;
         }
 
-        public function getPersonalityResult(){
-            $personalityResult = ['a deligence'=>, 'b responsibility', 'c cooperation', 'd autonomy','e leadership', 'f emotional state', 'g concentration', 'h emotional stability', 'i compliance', 'talentSynthesis'];
+        public function getTotalCorrectAnswer(){
+            $takerAnswer = $this->saveTakersAnswer();
+            $result = [];
+            foreach ($takerAnswer as $answerValue) {
+                $newConditionData = [];
+                $total = 0;
+                foreach($answerValue['answers'] as $answers){
+                    if($answers == 1){
+                    }
+                }
+            }
+
         }
 
 

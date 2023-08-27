@@ -18,12 +18,15 @@
 
     // $modifiedAnswers = new Conversation($arrayAnswers);
     $modifiedAnswers = new PersonalityElem($arrayAnswers);
+    $finalResult = $modifiedAnswers->savePersonalityInitResults();
 
     $result = $modifiedAnswers->testFunction();
     
-    /* foreach ($result as $value) {
-        echo $value['num'] .'-'. $value['modifiedAnswer'].'<br>';
-    } */
+    echo print_r($finalResult);
+
+    // foreach ($result as $value) {
+    //     echo $value['num'] .'-'. $value['modifiedAnswer'].'<br>';
+    // }
 
     $testPersonality = $modifiedAnswers->findPersonality();
     function compareByType($a, $b) {
@@ -31,15 +34,20 @@
     }
     usort($testPersonality,'compareByType');
 
-    /* foreach ($testPersonality as $value) {
-        echo $value['type'].'-'.$value['correctAnswer'].'-'.$value['numberOfHits'].'<br>';
-    } */
+    // foreach ($testPersonality as $value) {
+    //     echo $value['type'].'-'.$value['correctAnswer'].'-'.$value['numberOfHits'].'<br>';
+    // }
 
     $initResult = $modifiedAnswers->savePersonalityInitResults();
-    // echo print_r($initResult)
+    // echo print_r($initResult).'<br><br>';
 
     $jobAptitude = new JobAptitude($arrayAnswers);
     $resultJobAptitude = $jobAptitude->saveTakersAnswer();
 
-    echo print_r($resultJobAptitude);
+    // echo print_r($resultJobAptitude);
+
+    $condition = new ConditionJobAptitude($arrayAnswers);
+    $conditionResult = $condition->saveCandidateAnswer();
+
+    // echo print_r($conditionResult);
 ?>
