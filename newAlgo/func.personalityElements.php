@@ -9,7 +9,7 @@
         protected $personalityResult2 = [];
 
 
-        protected static $personnalityResultLabel1 = ['a deligence', 'b responsibility', 'c cooperation', 'd autonomy','e leadership', 'f emotional state', 'g concentration', 'h emotional stability', 'i compliance', 'talentSynthesis'];
+        protected static $personnalityResultLabel1 = ['a deligence', 'b responsibility', 'c cooperation', 'd autonomy','e leadership', 'f emotional state', 'g concentration', 'h emotional stability', 'i compliance'];
         protected static $personnalityResultLabel2 = ['confidenceLevel', 'testAttitude', 'testStatus', 'nonResponseRate', 'responseConsistency', 'antisocial'];
 
         protected static $personalityScoringCondition = [
@@ -82,39 +82,39 @@
         protected static $averageScoreCondition = [
             [
                 'type'=>'a deligence',
-                'row'=>5
+                'row'=>3
             ],
             [
                 'type'=>'b responsibility',
-                'row'=>7
+                'row'=>5
             ],
             [
                 'type'=>'c cooperation',
-                'row'=>10
+                'row'=>8
             ],
             [
                 'type'=>'d autonomy',
-                'row'=>13
+                'row'=>11
             ],
             [
                 'type'=>'e leadership',
-                'row'=>16
+                'row'=>14
             ],
             [
                 'type'=>'f emotional state',
-                'row'=>19
+                'row'=>17
             ],
             [
                 'type'=>'g concentration',
-                'row'=>22
+                'row'=>20
             ],
             [
                 'type'=>'h emotional stability',
-                'row'=>25
+                'row'=>23
             ],
             [
                 'type'=>'i compliance',
-                'row'=>27
+                'row'=>25
             ],
             
             
@@ -297,9 +297,9 @@
         
         protected function getNumberOfHit($correctAnswer, $modifiedAnswer){
             if ($correctAnswer == $modifiedAnswer) {
-                return 'true';
+                return TRUE;
             } else {
-                return 'false';
+                return FALSE;
             }
         }
 
@@ -319,26 +319,51 @@
         protected function getTotalNumberOfHits($numberOfHitsArr) {
             $count = 0;
             foreach ($numberOfHitsArr as $value) {
-                if ($value == true) {
+                if ($value == TRUE) {
                     $count++;
                 }
             }
             return $count;
         }
 
-        protected function getAverageScore(){
-            return 87;
+        protected function getAverageScore($totalNumHits, $condition) {
+            $result = 0;
+            foreach (self::$personalityScoringCondition as $scoringVal) {
+                if ($totalNumHits == $scoringVal['numCorrectAnswer']) {
+                    // Check if the 'scores' array contains the specified condition key
+                    if (isset($scoringVal['scores'][$condition])) {
+                        $result = $scoringVal['scores'][$condition];
+                        // Exit the loop once a match is found
+                        break;
+                    }
+                }
+            }
+            // Handle the case where there is no matching 'numCorrectAnswer'
+            return $result;
         }
 
         protected function getActualScore($totalModificationValue,$averageScore){
             // Calculate the sum of L23 and L24
-            $sum = $totalModificationValue + $averageScore;
+            $sum = $averageScore + $totalModificationValue;
 
             // Round down the sum to zero decimal places
             $result = floor($sum);
 
             return $result;
 
+        }
+
+        protected function getCondition($targetType){
+            $targetRow = null; // Initialize the variable to store the row value
+
+            foreach (self::$averageScoreCondition as $condition) {
+                if ($condition['type'] === $targetType) {
+                    $targetRow = $condition['row'];
+                    break; // Exit the loop once the target type is found
+                }
+            }
+
+            return $targetRow;
         }
 
         public function findPersonality() {
@@ -353,7 +378,7 @@
                 $modifiedAnswerValue = $modifiedAnswerValue['modifiedAnswer'];
         
                 foreach (self::$personalityElementsArr as $personalityElement) {
-                    if ($personalityElement['num'] == $num) {
+                    if ($personalityElement['num'] == $num && $personalityElement['correctAnswer'] != '') {
                         $correctAnswer = $this->getNumberOfCorrectAnswer($modifiedAnswerValue, $personalityElement['answerShape']);
                         $numberOfHit = $this->getNumberOfHit($personalityElement['correctAnswer'], $modifiedAnswerValue);
                         // Add data to the result array
@@ -398,36 +423,43 @@
                         $correctAnswerSum += is_numeric($result['correctAnswer']) ? $result['correctAnswer'] : 0;
                     }
                 }
-        
+                $condition = $this->getCondition($label);
                 $totalHits = $this->getTotalNumberOfHits($numHitsArr);
-                $averageScore = $this->getAverageScore();
+                $averageScore = $this->getAverageScore($totalHits, $condition);
                 $actualScore = $this->getActualScore($correctAnswerSum, $averageScore);
         
                 $savePersonalityInitResult[] = [
                     'type' => $label,
                     'incrementalScore' => $correctAnswerSum, // Store the sum of correctAnswer values
                     'totalNumberOfHits' => $totalHits,
-                    'actualScore' => $actualScore,
                     'averageScore' => $averageScore,
+                    'actualScore' => $actualScore,
+                    // 'condition'=>$condition,
+                    // 'hitResult'=>$totalHits+$correctAnswerSum
                 ];
             }
         
             return $savePersonalityInitResult;
         }
-
         
-        protected function savePersonalityResult(){
+        public function savePersonalityResult(){
             $initResult = $this->savePersonalityInitResults();
+            $result = [];
+            $count = 0;
+            $talentSynthesis = 0;
+            foreach($initResult as $initVal){
+                $result[] = ['type'=>$initVal['type'],'score'=>$initVal['actualScore']];
+                $count++;
+                $talentSynthesis += $initVal['actualScore'];
+            }
+            $score = round($talentSynthesis / $count);
+            $result[] = ['type'=>'talent synthesis','score'=>$score];
+
+            return $result;
         }
 
         public function modifiedAnswer(){
             return parent::saveModifiedAnswer();
-        }
-
-        public function testFunction(){
-            $modifiedAnswer = parent::saveModifiedAnswer();
-
-            return $modifiedAnswer;
         }
         
 

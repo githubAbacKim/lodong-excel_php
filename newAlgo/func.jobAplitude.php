@@ -4,43 +4,43 @@
             [
                 'type'=>'management', 
                 'question'=>[70,110,150,152,155,183,181],
-                'scoreRef'=>[ 'cooperation','autonomy']
+                'scoreRef'=>['c cooperation','d autonomy']
             ],
             [
                 'type'=>'safety', 
                 'question'=>[157,177,180,175,167,159,''],
-                'scoreRef'=>[  'responsibility','cooperation','emotional stability']
+                'scoreRef'=>['b responsibility','c cooperation','h emotional stability']
                 
             ],
             [
                 'type'=>'accounting', 
                 'question'=>[40,60,90,121,162,165,''],
-                'scoreRef'=>['deligence','compliance']
+                'scoreRef'=>['a deligence','i compliance']
             ],
             [
                 'type'=>'administration', 
                 'question'=>[20,80,86,140,178,160,156],
-                'scoreRef'=>[ 'leadership','compliance']
+                'scoreRef'=>[ 'e leadership','i compliance']
             ],
             [
                 'type'=>'technique', 
                 'question'=>[10,30,50,130,151,154,''],
-                'scoreRef'=>[ 'responsibility','emotional stability']
+                'scoreRef'=>['b responsibility','h emotional stability']
             ],
             [
                 'type'=>'research', 
                 'question'=>[169,174,163,172,164,161,''],
-                'scoreRef'=>[ 'deligence','responsibility','leadership']
+                'scoreRef'=>[ 'a deligence','b responsibility','e leadership']
             ],
             [
                 'type'=>'it', 
                 'question'=>[100,120,153,184,171,179,''],
-                'scoreRef'=>[ 'responsibility','compliance']
+                'scoreRef'=>[ 'b responsibility','i compliance']
             ],
             [
                 'type'=>'manufacturing', 
                 'question'=>[182,173,176,168,170,158,''],
-                'scoreRef'=>[ 'deligence','responsibility','emotional stability']
+                'scoreRef'=>[ 'a deligence','b responsibility','h emotional stability']
             ],
         ];
         
@@ -127,20 +127,82 @@
             return $takerAnswer;
         }
 
-        public function getTotalCorrectAnswer(){
-            $takerAnswer = $this->saveTakersAnswer();
+        protected function getTotalCorrectAnswer($numberOfHitsArr) {
+            $count = 0;
+            foreach ($numberOfHitsArr as $value) {
+                if ($value == 1) {
+                    $count++;
+                }
+            }
+            return $count;
+        }
+
+
+        protected function getFinalResult($type) {
+            // Get the Personality Result from personalityElements
+            $scoreArray = parent::getPersonalityResult();
+            foreach ($scoreArray as $item) {
+                if ($item['type'] === $type) {
+                    return $item['score'];
+                }
+            }
+            return null; // Type not found
+        }
+
+        public function saveTotalCorrectAnswer() {
             $result = [];
-            foreach ($takerAnswer as $answerValue) {
-                $newConditionData = [];
-                $total = 0;
-                foreach($answerValue['answers'] as $answers){
-                    if($answers == 1){
-                    }
+        
+            $answers = parent::saveCandidateAnswer();
+        
+            foreach ($answers as $answer) {
+                $scores = []; // Declare $scores here to accumulate scores for each answer
+        
+                $totalCorrectAnswer = $this->getTotalCorrectAnswer($answer['takerAnswers']);
+                $convertedScore = $this->condition1Result($totalCorrectAnswer);
+                $scores[] = $convertedScore; // Remove the inner square brackets
+        
+                // foreach (self::$jobAptitudeData as $jobData) {
+                //     if ($answer['type'] == $jobData['type']) {
+                //         foreach ($jobData['scoreRef'] as $type) {
+                //             $scores[] = $this->getFinalResult($type);
+                //         }
+                //     }
+                // }
+        
+                $result[] = ['type' => $answer['type'], 'totalScore' => $scores]; // Change 'totaScore' to 'totalScore'
+            }
+        
+            return $result; // Add this return statement to make the result accessible outside the function
+        }
+
+        protected function sumTotalAnswer($scoresArr) {
+            $sum = 0;
+            foreach ($scoresArr as $value) {
+                if (is_numeric($value)) { // Check if the value is numeric
+                    $sum += $value;
+                }
+            }
+            return $sum;
+        }
+        
+        public function getPersonalityAcquisitionScore() {
+            $totalScores = $this->saveTotalCorrectAnswer(); // Ensure this function returns the correct data structure
+            $result = [];
+            foreach ($totalScores as $scores) {
+                $result[] = ['type' => $scores['type'], 'score' => $this->sumTotalAnswer($scores['totaScore'])]; // Use 'totaScore' here
+            }
+            return $totalScores;
+        }
+        
+
+        public function test(){
+            foreach (self::$jobAptitudeData as $jobData) {
+                foreach ($jobData['scoreRef'] as $type) {
+                    echo $type.' '.$this->getFinalResult($type).'<br>';
                 }
             }
 
         }
-
 
     }
 ?>

@@ -82,7 +82,7 @@
         }
 
         protected function getPersonalityResult(){
-            
+            return parent::savePersonalityResult();
         }
     }
 ?>
