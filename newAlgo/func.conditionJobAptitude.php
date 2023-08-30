@@ -9,7 +9,7 @@
             ],
             [
                 'type'=>'safety',
-                'questions'=>[70,110,150,152,155,181,183],
+                'questions'=>[157,177,180,175,167,159],
                 'correctAnswer'=>[1,1,1,1,1,1,1]
             ],
             [
@@ -44,41 +44,69 @@
             ]
         ];
 
+        protected static $jobAptitudeLabels = ['management','safety','accounting','administration','technique','research','it','manufacturing'];
+
         public function __construct($answers)
         {
             parent::__construct($answers);
         }
 
         public function saveCandidateAnswer(){
-            $modifiedAnswer = parent::modifiedAnswer();
+            $modifiedAnswer = parent::saveModifiedAnswer();
             $newData = [];
-        
+
             foreach (self::$conditionData as $conditionVal) {
                 $questionArray = $conditionVal['questions'];
                 $answerArray = []; // Reset the answer array for each type
-        
-                foreach ($modifiedAnswer as $answer) {
-                    if (in_array($answer['num'], $questionArray)) {
-                        // Check if the answer is correct for this type
-                        $correctAnswerKey = array_search($answer['num'], $questionArray);
-                        if ($correctAnswerKey !== false && $conditionVal['correctAnswer'][$correctAnswerKey] == $answer['modifiedAnswer']) {
-                            $answerArray[] = 1; // Correct answer
-                        } else {
-                            $answerArray[] = 0; // Incorrect answer
+
+                foreach ($questionArray as $num) {
+                    // Find the 'modifiedAnswer' value for the current 'num'
+                    $modifiedAnswerValue = null;
+                    foreach ($modifiedAnswer as $item) {
+                        if ($item['num'] === $num) {
+                            $modifiedAnswerValue = $item['modifiedAnswer'];
+                            break; // Found the value, exit the loop
                         }
                     }
+
+                    // Check if the 'modifiedAnswer' value is equal to 1
+                    if ($modifiedAnswerValue == 1) {
+                        $answerArray[] = 1; // Correct answer
+                    } else {
+                        $answerArray[] = 0; // Incorrect answer
+                    }
                 }
-        
+
                 // Add the type and answer array to takerAnswer
                 $newData[] = [
                     'type' => $conditionVal['type'],
                     'takerAnswers' => $answerArray,
-                    'questions'=>$questionArray
+                    'questions' => $questionArray
                 ];
             }
             return $newData;
-            // Now, $newData contains the takerAnswer for each type
-            // You may want to return or store this data as needed
+        }
+
+        public function sumCorrectAnswer(){
+            $result = [];
+            $answerData = $this->saveCandidateAnswer();
+            $sum = 0;
+            foreach ($answerData as $item) {
+                $type = $item['type'];
+                $answers = $item['takerAnswers'];
+                
+                // Manually calculate the sum
+                $sum = 0;
+                foreach ($answers as $score) {
+                    $sum += $score;
+                }
+                
+                $result[] = ['type' => $type, 'sum' => $sum];
+            }
+            
+
+            return $result;
+            
         }
 
         protected function getPersonalityResult(){

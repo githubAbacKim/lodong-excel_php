@@ -10,47 +10,37 @@
     $arrayAnswers = [];
 
     for ($i = 1; $i <= 228; $i++) {
-        $arrayAnswers[] = ['num'=>$i,'answer'=>rand(1, 5)];
+        $arrayAnswers[] = ['num'=>$i,'answer'=>rand(1,5)];
     }
 
     // array of sample answers
-    // print_r($arrayAnswers);
+    /* print_r($arrayAnswers);
+    echo '<br><br>'; */
 
-    // $modifiedAnswers = new Conversation($arrayAnswers);
-    $modifiedAnswers = new PersonalityElem($arrayAnswers);
-    $finalResult = $modifiedAnswers->savePersonalityResult();
+    /* $conversation = new Conversation($arrayAnswers);
+    $modifiedAnswer = $conversation->saveModifiedAnswer();
+
+    echo print_r($modifiedAnswer); */
+
+    $personalityElem = new PersonalityElem($arrayAnswers);
+    $finalResult = $personalityElem->savePersonalityResult();
+    $savePersonalityInitResults = $personalityElem->savePersonalityInitResults();
     
-    echo print_r($finalResult).'<br><br>';
-
-    // foreach ($result as $value) {
-    //     echo $value['num'] .'-'. $value['modifiedAnswer'].'<br>';
-    // }
-
-    $testPersonality = $modifiedAnswers->findPersonality();
-    function compareByType($a, $b) {
-        return strcmp($a['type'], $b['type']);
-    }
-    usort($testPersonality,'compareByType');
-
-    // foreach ($testPersonality as $value) {
-    //     echo $value['type'].'-'.$value['correctAnswer'].'-'.$value['numberOfHits'].'<br>';
-    // }
-
-    $initResult = $modifiedAnswers->savePersonalityInitResults();
-    // echo print_r($initResult).'<br><br>';
-
-    $jobAptitude = new JobAptitude($arrayAnswers);
-    $resultJobAptitude = $jobAptitude->saveTakersAnswer();
-
-    // echo print_r($resultJobAptitude);
-
+    echo print_r($savePersonalityInitResults);
+    echo '<br><br>';
+    echo $finalResult[0]['score'];
     $condition = new ConditionJobAptitude($arrayAnswers);
-    $conditionResult = $condition->saveCandidateAnswer();
+    $sumCorrectAnswer = $condition->sumCorrectAnswer();
+    $saveCandidateAnswer = $condition->saveCandidateAnswer();
 
-    // echo print_r($conditionResult);
+    // echo print_r($sumCorrectAnswer);
+    echo '<br><br>';
 
     $jobAptitude = new JobAptitude($arrayAnswers);
-    $acquisition = $jobAptitude->test();
-    echo $acquisition;
-
+    $saveTotalCorrectAnswer = $jobAptitude->saveTotalCorrectAnswer();
+    $acquisition = $jobAptitude->getPersonalityAcquisitionScore();
+    
+    // echo print_r($saveTotalCorrectAnswer);
+    echo '<br><br>';
+    echo print_r($acquisition);
 ?>

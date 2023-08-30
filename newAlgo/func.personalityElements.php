@@ -315,7 +315,6 @@
             return $sum;
         }
         
-
         protected function getTotalNumberOfHits($numberOfHitsArr) {
             $count = 0;
             foreach ($numberOfHitsArr as $value) {
@@ -433,7 +432,7 @@
                     'incrementalScore' => $correctAnswerSum, // Store the sum of correctAnswer values
                     'totalNumberOfHits' => $totalHits,
                     'averageScore' => $averageScore,
-                    'actualScore' => $actualScore,
+                    'actualScore' => $actualScore
                     // 'condition'=>$condition,
                     // 'hitResult'=>$totalHits+$correctAnswerSum
                 ];
@@ -456,10 +455,6 @@
             $result[] = ['type'=>'talent synthesis','score'=>$score];
 
             return $result;
-        }
-
-        public function modifiedAnswer(){
-            return parent::saveModifiedAnswer();
         }
         
 

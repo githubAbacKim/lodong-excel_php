@@ -96,7 +96,7 @@
 
         public function saveTakersAnswer(){
             // initialize the modified answer from the conversation class
-            $modifiedAnswer = parent::modifiedAnswer();
+            $modifiedAnswer = parent::saveModifiedAnswer();
 
             // Initialize an empty array to store taker answers
             $takerAnswer = [];
@@ -128,46 +128,42 @@
         }
 
         protected function getTotalCorrectAnswer($numberOfHitsArr) {
-            $count = 0;
-            foreach ($numberOfHitsArr as $value) {
-                if ($value == 1) {
-                    $count++;
-                }
-            }
-            return $count;
+           return array_sum($numberOfHitsArr);
         }
 
 
-        protected function getFinalResult($type) {
+        protected function getFinalResult($searchType) {
             // Get the Personality Result from personalityElements
             $scoreArray = parent::getPersonalityResult();
+            $score = null;
+            // Loop through the array to find the matching 'type'
             foreach ($scoreArray as $item) {
-                if ($item['type'] === $type) {
-                    return $item['score'];
+                if ($item['type'] === $searchType) {
+                    $score = $item['score'];
+                    break; // Exit the loop once a match is found
                 }
             }
-            return null; // Type not found
+
+            return $score; // Return Score
         }
 
         public function saveTotalCorrectAnswer() {
             $result = [];
         
-            $answers = parent::saveCandidateAnswer();
+            $answers = parent::sumCorrectAnswer();
         
             foreach ($answers as $answer) {
                 $scores = []; // Declare $scores here to accumulate scores for each answer
         
-                $totalCorrectAnswer = $this->getTotalCorrectAnswer($answer['takerAnswers']);
-                $convertedScore = $this->condition1Result($totalCorrectAnswer);
-                $scores[] = $convertedScore; // Remove the inner square brackets
+                $scores[] = $answer['sum']; // Remove the inner square brackets
         
-                // foreach (self::$jobAptitudeData as $jobData) {
-                //     if ($answer['type'] == $jobData['type']) {
-                //         foreach ($jobData['scoreRef'] as $type) {
-                //             $scores[] = $this->getFinalResult($type);
-                //         }
-                //     }
-                // }
+                foreach (self::$jobAptitudeData as $jobData) {
+                    if ($answer['type'] == $jobData['type']) {
+                        foreach ($jobData['scoreRef'] as $type) {
+                            $scores[] = $this->getFinalResult($type);
+                        }
+                    }
+                }
         
                 $result[] = ['type' => $answer['type'], 'totalScore' => $scores]; // Change 'totaScore' to 'totalScore'
             }
@@ -188,20 +184,13 @@
         public function getPersonalityAcquisitionScore() {
             $totalScores = $this->saveTotalCorrectAnswer(); // Ensure this function returns the correct data structure
             $result = [];
+            
             foreach ($totalScores as $scores) {
-                $result[] = ['type' => $scores['type'], 'score' => $this->sumTotalAnswer($scores['totaScore'])]; // Use 'totaScore' here
+                $total = array_sum($scores['totalScore']) / count($scores['totalScore']);
+                $result[] = ['type' => $scores['type'], 'score' => $total]; // Use 'score' instead of 'totaScore'
             }
-            return $totalScores;
-        }
-        
-
-        public function test(){
-            foreach (self::$jobAptitudeData as $jobData) {
-                foreach ($jobData['scoreRef'] as $type) {
-                    echo $type.' '.$this->getFinalResult($type).'<br>';
-                }
-            }
-
+            
+            return $result; // Return the calculated results, not $totalScores
         }
 
     }
