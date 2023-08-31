@@ -4,77 +4,94 @@
         {
             parent::__construct($answers);
         }
-        protected static $personnalityResultLabel1 = ['a deligence', 'b responsibility', 'c cooperation', 'd autonomy','e leadership', 'f emotional state', 'g concentration', 'h emotional stability', 'i compliance'];
 
         protected static $secondaryCondition = [
-            'set'=>[3,4,13,24],
-            'set'=>[23,24,25,43],
-            'set'=>[34,53,63],
-            'set'=>[73],
-            'set'=>[83,93,103],
-            'set'=>[59,74,84,113,134,144],
-            'set'=>[74,94,124,134],
-            'set'=>[6,16],
-            'set'=>[46,54,100,134],
-            'set'=>[123,127,133],
-            'set'=>[2,12,143],
-            'set'=>[12,32],
-            'set'=>[42,52],
-            'set'=>[62,72],
-            'set'=>[82,202],
-            'set'=>[11,31],
-            'set'=>[197],
-            'set'=>[9,19,29],
-            'set'=>[49,69,79],
-            'set'=>[116,126,146],
-            'set'=>[68,78,108],
-            'set'=>[1,11,14,21],
-            'set'=>[9,19,29,49],
-            'set'=>[69,79,89,99],
-            'set'=>[88,92,201],
-            'set'=>[3,13,102],
-            'set'=>[12,23,43],
-            'set'=>[203],
-            'set'=>[4,24,39,48,116],
-            'set'=>[96,114,116,134],
-            'set'=>[48,64,116,128],
-            'set'=>[44,46,54,96],
-            'set'=>[7,15,58,66,68,106],
-            'set'=>[55,87,135,145],
-            'set'=>[55,85,89,95,109],
-            'set'=>[1,5,11,14,17,21,27,37],
-            'set'=>[4,6,16,24,25,26,36],
-            'set'=>[208],
-            'set'=>[34,44,46,56],
-            'set'=>[9,19,54,64,66,74,76,96],
-            'set'=>[2,3,12,13],
-            'set'=>[74,94,113],
-            'set'=>[28,33,39,71,81],
-            'set'=>[6,107,124],
-            'set'=>[99,118,141],
-            'set'=>[55,81],
-            'set'=>[9,77,109],
-            'set'=>[78,127],
-            'set'=>[1,11,31,41,51],
-            'set'=>[8,18,94,124,134,144],
-            'set'=>[104,114,126,136,137],
-            'set'=>[84,94,106,116]
+            ['set'=>[3,4,13,24],'confidenceScore'=>100],
+            ['set'=>[23,24,25,43],'confidenceScore'=>99],
+            ['set'=>[34,53,63],'confidenceScore'=>98],
+            ['set'=>[73],'confidenceScore'=>97],
+            ['set'=>[83,93,103],'confidenceScore'=>97],
+            ['set'=>[59,74,84,113,134,144],'confidenceScore'=>96],
+            ['set'=>[74,94,124,134],'confidenceScore'=>95],
+            ['set'=>[6,16],'confidenceScore'=>94],
+            ['set'=>[46,54,100,134],'confidenceScore'=>94],
+            ['set'=>[123,127,133],'confidenceScore'=>93],
+            ['set'=>[2,12,143],'confidenceScore'=>92],
+            ['set'=>[12,32],'confidenceScore'=>91],
+            ['set'=>[42,52],'confidenceScore'=>90],
+            ['set'=>[62,72],'confidenceScore'=>89],
+            ['set'=>[82,202],'confidenceScore'=>88],
+            ['set'=>[11,31],'confidenceScore'=>87],
+            ['set'=>[197],'confidenceScore'=>86],
+            ['set'=>[9,19,29],'confidenceScore'=>85],
+            ['set'=>[49,69,79],'confidenceScore'=>84],
+            ['set'=>[116,126,146],'confidenceScore'=>83],
+            ['set'=>[68,78,108],'confidenceScore'=>82],
+            ['set'=>[1,11,14,21],'confidenceScore'=>81],
+            ['set'=>[9,19,29,49],'confidenceScore'=>80],
+            ['set'=>[69,79,89,99],'confidenceScore'=>79],
+            ['set'=>[88,92,201],'confidenceScore'=>78],
+            ['set'=>[3,13,102],'confidenceScore'=>77],
+            ['set'=>[12,23,43],'confidenceScore'=>76],
+            ['set'=>[203],'confidenceScore'=>75],
+            ['set'=>[4,24,39,48,116],'confidenceScore'=>74],
+            ['set'=>[96,114,116,134],'confidenceScore'=>73],
+            ['set'=>[48,64,116,128],'confidenceScore'=>72],
+            ['set'=>[44,46,54,96],'confidenceScore'=>71],
+            ['set'=>[7,15,58,66,68,106],'confidenceScore'=>70],
+            ['set'=>[55,87,135,145],'confidenceScore'=>69],
+            ['set'=>[55,85,89,95,109],'confidenceScore'=>68],
+            ['set'=>[1,5,11,14,17,21,27,37],'confidenceScore'=>67],
+            ['set'=>[4,6,16,24,25,26,36],'confidenceScore'=>66],
+            ['set'=>[208],'confidenceScore'=>65],
+            ['set'=>[34,44,46,56],'confidenceScore'=>64],
+            ['set'=>[9,19,54,64,66,74,76,96],'confidenceScore'=>63],
+            ['set'=>[2,3,12,13],'confidenceScore'=>62],
+            ['set'=>[74,94,113],'confidenceScore'=>61],
+            ['set'=>[28,33,39,71,81],'confidenceScore'=>60],
+            ['set'=>[6,107,124],'confidenceScore'=>59],
+            ['set'=>[99,118,141],'confidenceScore'=>58],
+            ['set'=>[55,81],'confidenceScore'=>57],
+            ['set'=>[9,77,109],'confidenceScore'=>56],
+            ['set'=>[78,127],'confidenceScore'=>55],
+            ['set'=>[1,11,31,41,51],'confidenceScore'=>54],
+            ['set'=>[8,18,94,124,134,144],'confidenceScore'=>53],
+            ['set'=>[104,114,126,136,137],'confidenceScore'=>52],
+            ['set'=>[84,94,106,116],'confidenceScore'=>51]
         ];
 
-        protected function getConfidenceResult($hits,$searchValue){
-            foreach ($hits as $value) {
-                if ($value !== $searchValue) {
-                    return false; // Found a mismatch, return false
+        protected static $deductionConditions = [
+            [14,12,],
+            [31,41],
+            [51,71],
+            [81,91],
+            [101,111],
+            [118,131],
+            [6,16],
+            [26,36],
+            [46,56]
+        ];
+
+        protected function getPrimaryResult($hits,$scoreRef){
+            $savePersonalityResult = parent::savePersonalityInitResults();
+            foreach($hits as $hitIndex) {
+                foreach($savePersonalityResult as $key => $personality){
+                    if($hitIndex == $key){
+                        if($personality['totalNumberOfHits'] !== $scoreRef){
+                            return 'false';
+                        }
+                    }
                 }
             }
-            return true;
+            // return true if all hits found and values are equal return true
+            return 'true';
+            
         }
 
-        protected function getConfidenceResult2($condition1,$ser){
-            if($condition1 == true){
+        protected function getPrimaryResult2($condition1){
+            if($condition1 == 'true'){
                 return 1;
             }
-
             return 2;
         }
 
@@ -82,301 +99,301 @@
             $hitResults = parent::savePersonalityInitResults();
 
             $primaryCondition = [
-                'set'=>[
+                [
                     'talentAward'=>'Diligence, compliance, responsibility',
                     'set' => [0,9,1],
                     'scoreRef' => 15,
                     'confidenceRef'=>100
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity, Compliance',
                     'set' => [0,9],
                     'scoreRef' => 15,
                     'confidenceRef'=>99
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity, Compliance',
                     'set' => [0,9],
                     'scoreRef' => 15,
                     'confidenceRef'=>98
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Honesty, compliance',
                     'set' => [0,9],
                     'scoreRef' => 15,
                     'confidenceRef'=>97
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 15,
                     'confidenceRef'=>96
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity, Compliance',
                     'set' => [0,9],
                     'scoreRef' => 14,
                     'confidenceRef'=>95
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 15,
                     'confidenceRef'=>94
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 15,
                     'confidenceRef'=>93
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 15,
                     'confidenceRef'=>92
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 14,
                     'confidenceRef'=>91
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 13,
                     'confidenceRef'=>90
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 13,
                     'confidenceRef'=>89
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 12,
                     'confidenceRef'=>88
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 12,
                     'confidenceRef'=>87
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>86
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>85
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>84
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>83
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>82
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>81
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>80
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 11,
                     'confidenceRef'=>79
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 10,
                     'confidenceRef'=>78
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 10,
                     'confidenceRef'=>77
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 10,
                     'confidenceRef'=>76
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>75
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>74
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>73
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>72
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>71
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>70
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>69
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>68
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>67
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 9,
                     'confidenceRef'=>66
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 8,
                     'confidenceRef'=>65
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Honesty, compliance',
                     'set' => [0,9],
                     'scoreRef' => 8,
                     'confidenceRef'=>64
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence, Compliance',
                     'set' => [0,9],
                     'scoreRef' => 8,
                     'confidenceRef'=>63
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 8,
                     'confidenceRef'=>62
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence, Compliance',
                     'set' => [0,9],
                     'scoreRef' => 7,
                     'confidenceRef'=>61
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 7,
                     'confidenceRef'=>60
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 6,
                     'confidenceRef'=>59
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Sincerity, Sentiment',
                     'set' => [0,7],
                     'scoreRef' => 5,
                     'confidenceRef'=>58
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 4,
                     'confidenceRef'=>57
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 3,
                     'confidenceRef'=>56
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Conscientiousness',
                     'set' => [0],
                     'scoreRef' => 2,
                     'confidenceRef'=>55
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 2,
                     'confidenceRef'=>54
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 2,
                     'confidenceRef'=>53
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Diligence',
                     'set' => [0],
                     'scoreRef' => 2,
                     'confidenceRef'=>52
                 ],
-                'set'=>[
+                [
                     'talentAward'=>'Integrity',
                     'set' => [0],
                     'scoreRef' => 0,
@@ -389,11 +406,197 @@
         }
         
         public function primaryConditionResult(){
+            /* [
+                'talentAward'=>'Diligence, compliance, responsibility',
+                'set' => [0,9,1],
+                'scoreRef' => 15,
+                'confidenceRef'=>100
+            ] */
+
+            $conditionData = $this->primaryCondition();
+            $result = [];
+            foreach($conditionData as $data){
+                $result1 = $this->getPrimaryResult($data['set'],$data['scoreRef']);
+                $result2 = $this->getPrimaryResult2($result1);
+                
+                $result[] = ['primResult1'=>$result1,'confidenceRef'=>$data['confidenceRef'],'primResult2'=>$result2];
+            
+            }
+
+            return $result;
+        }
+
+        protected function getSecondaryResult1($set){
+            // get the taker answers and identify if all of the set number's answer are all equal the return true else return false
+            $answersArray = parent::saveModifiedAnswer();
+            $firstModifiedAnswer = null;
+            $areEqual = 'true';
+
+            foreach ($set as $num) {
+                foreach ($answersArray as $answer) {
+                    if ($answer['num'] === $num) {
+                        if ($firstModifiedAnswer === null) {
+                            $firstModifiedAnswer = $answer['modifiedAnswer'];
+                        } else {
+                            if ($firstModifiedAnswer !== $answer['modifiedAnswer']) {
+                                $areEqual = 'false';
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (!$areEqual) {
+                    break;
+                }
+            }
+
+            if (!$areEqual) {
+                return 'false'; // At least one set of modified answers is not equal
+            }
+
+            return $areEqual;
+        }
+
+        protected function getSecondaryResult2($result){
+            // check if secondary result 1 result, if equal to true return 1 else return null / ''
+            if($result == 'true'){
+                return 1;
+            }
+
+            return "";
+        }
+
+        protected function getSecondaryResult3($result, $index){
+            // match primary result 1 to secondary result 2, if equal return true else return false
+            // $result[] = ['primResult1'=>$result1,'confidenceRef'=>$data['confidenceRef'],'primResult2'=>$result2];
+            $primResults = $this->primaryConditionResult();
+            // foreach($primResults as $primKey => $primVal) {
+            //     if($index == $primKey){
+            //         if($primVal['primResult2'] == $result){
+            //             return 'true';
+            //         }
+            //     }
+            // }
+            if(isset($primResults[$index]['primResult2']) && $primResults[$index]['primResult2'] == $result && $result !== ''){
+                return 'true';
+            }
+
+            return 'false';
 
         }
 
+        protected function getSecondaryResult4($result, $index){
+            // primary result 2 is equal to secondary result 3, if equal return true else return false
+            $primResults = $this->primaryConditionResult();
+
+            /* foreach($primResults as $primKey => $primVal) {
+                    if($index == $primKey){
+                        if($primVal['primResult1'] == 'true' && $result == 'true'){
+                            return 'true';
+                        }
+                    }
+            } */
+            if(isset($primResults[$index]['primResult1']) && $primResults[$index]['primResult1'] == 'true' && $result == 'true'){
+                return 'true';
+            }
+
+            return 'false';
+        }
+
         public function secondaryConditionResult(){
+            // iterate secondary condition data and get the results. create new array to return as result data
+
+            // ['set'=>[3,4,13,24],'confidenceScore'=>0],
             
+            $result = [];
+            $secondaryCondition = self::$secondaryCondition;
+            foreach ($secondaryCondition as $key => $value) {
+                $result1 = $this->getSecondaryResult1($value['set']);
+                $result2 = $this->getSecondaryResult2($result1);
+                $result3 = $this->getSecondaryResult3($result2, $key);
+                $result4 = $this->getSecondaryResult4($result3, $key);
+
+                $result[] = ['secondaryResult1'=>$result1,'secondaryResult2'=>$result2,'secondaryResult3'=>$result3,'secondaryResult4'=>$result4,'scoreRef'=>$value['confidenceScore'],];
+            }
+
+            return $result;
+        }
+
+        protected function getDeductionResult1($set){
+            $answersArray = parent::saveModifiedAnswer();
+
+            $firstModifiedAnswer = null;
+            $areEqual = 1;
+
+            foreach ($set as $num) {
+                foreach ($answersArray as $answer) {
+                    if ($answer['num'] === $num) {
+                        if ($firstModifiedAnswer === null) {
+                            $firstModifiedAnswer = $answer['modifiedAnswer'];
+                        } else {
+                            if ($firstModifiedAnswer !== $answer['modifiedAnswer']) {
+                                $areEqual = 'false';
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (!$areEqual) {
+                    break;
+                }
+            }
+
+            if (!$areEqual) {
+                return 'false'; // At least one set of modified answers is not equal
+            }
+
+            return $areEqual;
+
+        }
+
+        public function deductionResult(){
+            $deductionData = self::$deductionConditions;
+            $result = [];
+            foreach ($deductionData as $key => $value) {
+                $result[] = $this->getDeductionResult1($value);
+            }
+
+            return $result;
+        }
+
+        protected function getDeductionValue($deductions){
+            $sum = 0;
+        
+            foreach ($deductions as $deductVal) {
+                if (is_numeric($deductVal)) {
+                    $sum += $deductVal;
+                }
+            }
+
+            return $sum;
+        }
+
+        public function finalResponseResult(){
+            $deductionResult = $this->deductionResult();
+            $secondaryResult = $this->secondaryConditionResult();
+            
+            $result = 0;
+            $total = 0;
+            foreach ($deductionResult as $value) {
+                if(is_numeric($value)){
+                    $total = $total + $value;
+                }
+            }
+            
+            foreach ($secondaryResult as $value) {
+                if ($value['secondaryResult4'] == 'true'){
+                    $result = $value['scoreRef']; // Subtract $sum instead of adding
+                }
+            }
+            
+            return $result - $total;            
         }
     }
 ?>

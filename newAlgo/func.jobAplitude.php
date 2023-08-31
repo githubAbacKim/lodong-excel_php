@@ -187,7 +187,7 @@
             
             foreach ($totalScores as $scores) {
                 $total = array_sum($scores['totalScore']) / count($scores['totalScore']);
-                $result[] = ['type' => $scores['type'], 'score' => $total]; // Use 'score' instead of 'totaScore'
+                $result[] = ['type' => $scores['type'], 'score' => round($total)]; // Use 'score' instead of 'totaScore'
             }
             
             return $result; // Return the calculated results, not $totalScores
