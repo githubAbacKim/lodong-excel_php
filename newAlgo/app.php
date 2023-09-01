@@ -29,7 +29,7 @@
     
     // echo print_r($savePersonalityInitResults);
     echo '<br><br>';
-    // echo $finalResult[0]['score'];
+    echo $finalResult[0]['score'];
     echo print_r($finalResult);
     $condition = new ConditionJobAptitude($arrayAnswers);
     $sumCorrectAnswer = $condition->sumCorrectAnswer();
@@ -57,13 +57,19 @@
     /* foreach ($primaryConditionResult as $key => $value) {
         echo 'result1 = '.$value['primResult1'].', result2 = '.$value['primResult2'].'<br>';
     } */
-    /* echo '<br><br>';
-    foreach ($secondaryConditionResult as $key => $value) {
+    echo '<br><br>';
+    /* foreach ($secondaryConditionResult as $key => $value) {
         echo 'result1 = '.$value['secondaryResult1'].', result2 = '.$value['secondaryResult2'].', result3 = '.$value['secondaryResult3'].', result4 = '.$value['secondaryResult4'].', scoreRef = '.$value['scoreRef'].'<br>';
     } */
-
+    // echo print_r($secondaryConditionResult);
     echo '<br><br>';
     // echo print_r($deductionResult);
     echo '<br><br>';
-    echo $finalResponseResult;
+    echo print_r($finalResponseResult);
+
+    /* $emotionalState = isset($secondaryResult[5]['score']) ? $secondaryResult[5]['score'] : 0;
+    $emotionalStability = isset($secondaryResult[7]['score']) ? $secondaryResult[7]['score'] : 0;
+    $concentration = isset($secondaryResult[6]['score']) ? $secondaryResult[6]['score'] : 0;
+    $testerStatus = ($emotionalState + $emotionalStability) / 2;
+    $testAttitude = $concentration - 0; */
 ?>

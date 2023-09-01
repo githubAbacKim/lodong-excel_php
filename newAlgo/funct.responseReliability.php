@@ -426,7 +426,7 @@
             return $result;
         }
 
-        protected function getSecondaryResult1($set){
+        /* protected function getSecondaryResult1($set){
             // get the taker answers and identify if all of the set number's answer are all equal the return true else return false
             $answersArray = parent::saveModifiedAnswer();
             $firstModifiedAnswer = null;
@@ -456,6 +456,26 @@
             }
 
             return $areEqual;
+        } */
+        protected function getSecondaryResult1($set) {
+            $answersArray = parent::saveModifiedAnswer();
+            $firstModifiedAnswer = null;
+            
+            foreach ($set as $num) {
+                foreach ($answersArray as $answer) {
+                    if ($answer['num'] === $num) {
+                        if ($firstModifiedAnswer === null) {
+                            $firstModifiedAnswer = $answer['modifiedAnswer'];
+                        } else {
+                            if ($firstModifiedAnswer !== $answer['modifiedAnswer']) {
+                                return 'false'; // Break early, no need to check further
+                            }
+                        }
+                    }
+                }
+            }
+        
+            return 'true';
         }
 
         protected function getSecondaryResult2($result){
@@ -465,25 +485,22 @@
             }
 
             return "";
+            
         }
 
-        protected function getSecondaryResult3($result, $index){
-            // match primary result 1 to secondary result 2, if equal return true else return false
-            // $result[] = ['primResult1'=>$result1,'confidenceRef'=>$data['confidenceRef'],'primResult2'=>$result2];
+        protected function getSecondaryResult3($result, $index) {
+            // Create a lookup table for primary results
             $primResults = $this->primaryConditionResult();
-            // foreach($primResults as $primKey => $primVal) {
-            //     if($index == $primKey){
-            //         if($primVal['primResult2'] == $result){
-            //             return 'true';
-            //         }
-            //     }
-            // }
-            if(isset($primResults[$index]['primResult2']) && $primResults[$index]['primResult2'] == $result && $result !== ''){
-                return 'true';
+        
+            // Check if the index exists in the lookup table
+            if (isset($primResults[$index])) {
+                // Compare primary result 2 to the provided result
+                if ($primResults[$index]['primResult2'] == $result) {
+                    return 'true';
+                }
             }
-
+        
             return 'false';
-
         }
 
         protected function getSecondaryResult4($result, $index){
@@ -513,7 +530,7 @@
             $secondaryCondition = self::$secondaryCondition;
             foreach ($secondaryCondition as $key => $value) {
                 $result1 = $this->getSecondaryResult1($value['set']);
-                $result2 = $this->getSecondaryResult2($result1);
+                $result2 = ($result1 == 'true') ? 1 : 0;
                 $result3 = $this->getSecondaryResult3($result2, $key);
                 $result4 = $this->getSecondaryResult4($result3, $key);
 
@@ -582,8 +599,10 @@
             $deductionResult = $this->deductionResult();
             $secondaryResult = $this->secondaryConditionResult();
             
-            $result = 0;
+            $confidenceScore = 0;
             $total = 0;
+            $result = [];
+            $confidenceLevel = null;
             foreach ($deductionResult as $value) {
                 if(is_numeric($value)){
                     $total = $total + $value;
@@ -592,11 +611,21 @@
             
             foreach ($secondaryResult as $value) {
                 if ($value['secondaryResult4'] == 'true'){
-                    $result = $value['scoreRef']; // Subtract $sum instead of adding
+                    $confidenceScore = $value['scoreRef'] - $total; // Subtract $sum instead of adding
                 }
             }
+
+            if($confidenceScore <= 60){
+                $confidenceLevel = '심각';
+            }elseif ($confidenceScore >= 61 && $confidenceScore <= 70) {
+                $confidenceLevel = '보통';
+            }else{
+                $confidenceLevel = '양호';
+            }
+
+
             
-            return $result - $total;            
+            return $result[] = ['confidencelevel'=>$confidenceLevel,'nonResponseRate'=>0,'responseConsistency'=>$confidenceScore];            
         }
     }
 ?>
