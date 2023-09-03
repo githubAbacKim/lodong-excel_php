@@ -428,7 +428,7 @@
                 $actualScore = $this->getActualScore($correctAnswerSum, $averageScore);
         
                 $savePersonalityInitResult[] = [
-                    'type' => $label,
+                    'type' => substr($label,2),
                     'incrementalScore' => $correctAnswerSum, // Store the sum of correctAnswer values
                     'totalNumberOfHits' => $totalHits,
                     'averageScore' => $averageScore,

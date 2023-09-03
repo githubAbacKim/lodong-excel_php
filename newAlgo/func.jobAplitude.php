@@ -138,13 +138,24 @@
             $score = null;
             // Loop through the array to find the matching 'type'
             foreach ($scoreArray as $item) {
-                if ($item['type'] === $searchType) {
+                if ($item['type'] === substr($searchType,2)) {
                     $score = $item['score'];
                     break; // Exit the loop once a match is found
                 }
             }
 
             return $score; // Return Score
+        }
+
+        protected function convertSumAnswer($score){
+            $result = 0;
+            foreach(self::$jobAptitudeScoreRef as $ref){
+                if($ref['numAnswer'] == $score){
+                    $result = $ref['score'];
+                }
+            }
+
+            return $result;
         }
 
         public function saveTotalCorrectAnswer() {
@@ -155,7 +166,7 @@
             foreach ($answers as $answer) {
                 $scores = []; // Declare $scores here to accumulate scores for each answer
         
-                $scores[] = $answer['sum']; // Remove the inner square brackets
+                $scores[] = $this->convertSumAnswer($answer['sum']); // Remove the inner square brackets
         
                 foreach (self::$jobAptitudeData as $jobData) {
                     if ($answer['type'] == $jobData['type']) {
@@ -186,7 +197,7 @@
             $result = [];
             
             foreach ($totalScores as $scores) {
-                $total = array_sum($scores['totalScore']) / count($scores['totalScore']);
+                $total = array_sum($scores['totalScore']) / 3;
                 $result[] = ['type' => $scores['type'], 'score' => round($total)]; // Use 'score' instead of 'totaScore'
             }
             

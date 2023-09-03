@@ -625,7 +625,7 @@
 
 
             
-            return $result[] = ['confidencelevel'=>$confidenceLevel,'nonResponseRate'=>0,'responseConsistency'=>$confidenceScore];            
+            return $result[] = ['confidencelevel'=>$confidenceLevel,'responseConsistency'=>$confidenceScore];            
         }
     }
 ?>
