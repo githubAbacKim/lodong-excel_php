@@ -426,37 +426,6 @@
             return $result;
         }
 
-        /* protected function getSecondaryResult1($set){
-            // get the taker answers and identify if all of the set number's answer are all equal the return true else return false
-            $answersArray = parent::saveModifiedAnswer();
-            $firstModifiedAnswer = null;
-            $areEqual = 'true';
-
-            foreach ($set as $num) {
-                foreach ($answersArray as $answer) {
-                    if ($answer['num'] === $num) {
-                        if ($firstModifiedAnswer === null) {
-                            $firstModifiedAnswer = $answer['modifiedAnswer'];
-                        } else {
-                            if ($firstModifiedAnswer !== $answer['modifiedAnswer']) {
-                                $areEqual = 'false';
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                if (!$areEqual) {
-                    break;
-                }
-            }
-
-            if (!$areEqual) {
-                return 'false'; // At least one set of modified answers is not equal
-            }
-
-            return $areEqual;
-        } */
         protected function getSecondaryResult1($set) {
             $answersArray = parent::saveModifiedAnswer();
             $firstModifiedAnswer = null;

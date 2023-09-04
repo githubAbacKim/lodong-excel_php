@@ -18,7 +18,7 @@
     $conversation = new Conversation($arrayAnswers);
     $modifiedAnswer = $conversation->saveModifiedAnswer();
 
-    echo '<h3>Modified Answer:</h3> <br>';
+    echo '<h3>Conversation - Modified Answer:</h3> <br>';
     echo json_encode($modifiedAnswer);
     echo "<br><br>";
 
@@ -26,11 +26,11 @@
     $finalPersonalityResult = $personalityElem->savePersonalityResult();
     $savePersonalityInitResults = $personalityElem->savePersonalityInitResults();
 
-    echo '<h3>savePersonalityInitResults:</h3> <br>';
+    echo '<h3>PersonalityElem - savePersonalityInitResults:</h3> <br>';
     echo json_encode($savePersonalityInitResults);
     echo "<br><br>";
 
-    echo '<h3>finalPersonalityResult:</h3> <br>';
+    echo '<h3>PersonalityElem - finalPersonalityResult:</h3> <br>';
     echo json_encode($finalPersonalityResult);
     echo "<br><br>";
     
@@ -38,27 +38,32 @@
     $sumCorrectAnswer = $condition->sumCorrectAnswer();
     $saveCandidateAnswer = $condition->saveCandidateAnswer();
     
-    echo '<h3>sumCorrectAnswer:</h3> <br>';
+    echo '<h3>ConditionJobAptitude - sumCorrectAnswer:</h3> <br>';
     echo json_encode($sumCorrectAnswer);
     echo "<br><br>";
 
-    echo '<h3>saveCandidateAnswer:</h3> <br>';
+    echo '<h3>ConditionJobAptitude - saveCandidateAnswer:</h3> <br>';
     echo json_encode($saveCandidateAnswer);
     echo "<br><br>";
 
     $jobAptitude = new JobAptitude($arrayAnswers);
     $saveTotalCorrectAnswer = $jobAptitude->saveTotalCorrectAnswer();
     $acquisition = $jobAptitude->getPersonalityAcquisitionScore();
-    echo '<h3>saveTotalCorrectAnswer:</h3> <br>';
+    echo '<h3>JobAptitude - saveTotalCorrectAnswer:</h3> <br>';
     echo json_encode($saveTotalCorrectAnswer);
     echo "<br><br>";
-    echo '<h3>acquisition:</h3> <br>';
+    echo '<h3>JobAptitude - acquisition:</h3> <br>';
     echo json_encode($acquisition);
+    echo "<br><br>";
 
     $responseReliabilitty = new ResponseReliability($arrayAnswers);
     /* $primaryConditionResult = $responseReliabilitty->primaryConditionResult();
     $secondaryConditionResult = $responseReliabilitty->secondaryConditionResult(); */
     $finalResponseResult = $responseReliabilitty->finalResponseResult();
+
+    echo '<h3>ResponseReliability - finalResponseResult:</h3> <br>';
+    echo json_encode($finalResponseResult);
+    echo "<br><br>";
 
     // make result arrays from different processing
     function calculateAverage($scores){
@@ -107,6 +112,7 @@
     $testAttitude = $finalPersonalityResult[6]['score'] - $nonResponseRate;
     $testerStatus = ($finalPersonalityResult[5]['score'] + $finalPersonalityResult[7]['score']) / 2;
 
+    $inspectorStatus = $finalResponseResult['confidencelevel'];
     $nonResponse = $testAttitude;
     $responseConfidenseLevel = round($testerStatus);
     $organizationalLifeAdaptionIndex = $nonResponseRate;
@@ -155,7 +161,8 @@
     $jobSynthesis = 0;
 
     $examResult = [
-        'nonResponse'=>$nonResponse,
+        'inspector status'=>$inspectorStatus,
+        'non-response'=>$nonResponse,
         'response confidense level'=>$responseConfidenseLevel,
         'organizational life adaption index'=>$organizationalLifeAdaptionIndex,
         'inability to handle work'=>$inabilityToHandleWork,
